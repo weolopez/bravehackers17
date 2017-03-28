@@ -8,27 +8,35 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import 'rxjs/add/observable/of';
 
+import {AngularFire, FirebaseObjectObservable} from 'angularfire2';
+
 
 @Injectable()
 export class ConferenceData {
   data: any;
-
-  constructor(public http: Http, public user: UserData) { }
+  af: AngularFire;
+  item: any;//FirebaseObjectObservable<any>;
+  constructor(public http: Http, public user: UserData, angularFire: AngularFire) {
+    this.af=angularFire;
+  }
 
   load(): any {
+
     if (this.data) {
       return Observable.of(this.data);
     } else {
-      return this.http.get('assets/data/data.json')
-        .map(this.processData, this);
+      return this.af.database.object('/conference')
+          .map(this.processData, this);
+     //this.http.get('assets/data/data.json')
     }
   }
 
   processData(data: any) {
+    if (data === undefined) return;
     // just some good 'ol JS fun with objects and arrays
     // build up the data by linking speakers to sessions
-    this.data = data.json();
-
+   this.data = data;
+     
     this.data.tracks = [];
 
     // loop through each day in the schedule
