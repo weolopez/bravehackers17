@@ -3,17 +3,58 @@ import { Injectable } from '@angular/core';
 import { Events } from 'ionic-angular';
 import { Storage } from '@ionic/storage';
 
+import { AuthProviders, AngularFireAuth, FirebaseAuthState, AuthMethods } from 'angularfire2';
 
 @Injectable()
 export class UserData {
+  private authState: FirebaseAuthState;
+
   _favorites: string[] = [];
   HAS_LOGGED_IN = 'hasLoggedIn';
   HAS_SEEN_TUTORIAL = 'hasSeenTutorial';
 
   constructor(
     public events: Events,
-    public storage: Storage
-  ) {}
+    public storage: Storage,
+    public auth$: AngularFireAuth
+  ) {
+    this.authState = auth$.getAuth();
+    auth$.subscribe((state: FirebaseAuthState) => {
+      this.authState = state;
+    });
+  }
+
+
+  get authenticated(): boolean {
+    return this.authState !== null;
+  }
+
+  getUserPicture() {
+    if (this.authState != null) {
+      return this.authState.github.photoURL;
+    } else {
+      return '';
+    }
+  }
+
+  signInWithGitHub(): firebase.Promise<FirebaseAuthState> {
+    return this.auth$.login({
+      provider: AuthProviders.Github,
+      method: AuthMethods.Popup
+    });
+  }
+
+  signOut(): void {
+    this.auth$.logout();
+  }
+
+  displayName(): string {
+    if (this.authState != null) {
+      return this.authState.github.displayName;
+    } else {
+      return '';
+    }
+  }
 
   hasFavorite(sessionName: string): boolean {
     return (this._favorites.indexOf(sessionName) > -1);
@@ -43,6 +84,7 @@ export class UserData {
   };
 
   logout(): void {
+    this.signOut();
     this.storage.remove(this.HAS_LOGGED_IN);
     this.storage.remove('username');
     this.events.publish('user:logout');

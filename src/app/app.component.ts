@@ -8,7 +8,7 @@ import { AboutPage } from '../pages/about/about';
 import { AccountPage } from '../pages/account/account';
 import { LoginPage } from '../pages/login/login';
 import { MapPage } from '../pages/map/map';
-import { SignupPage } from '../pages/signup/signup';
+//import { SignupPage } from '../pages/signup/signup' 
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SchedulePage } from '../pages/schedule/schedule';
@@ -23,6 +23,7 @@ export interface PageInterface {
   component: any;
   icon: string;
   logsOut?: boolean;
+  logsIn?: boolean;
   index?: number;
   tabComponent?: any;
 }
@@ -50,9 +51,9 @@ export class ConferenceApp {
     { title: 'Logout', component: TabsPage, icon: 'log-out', logsOut: true }
   ];
   loggedOutPages: PageInterface[] = [
-    { title: 'Login', component: LoginPage, icon: 'log-in' },
-    { title: 'Support', component: SupportPage, icon: 'help' },
-    { title: 'Signup', component: SignupPage, icon: 'person-add' }
+    { title: 'Login', component: LoginPage, icon: 'log-in', logsIn: true },
+    { title: 'Support', component: SupportPage, icon: 'help' }
+    //{ title: 'Signup', component: SignupPage, icon: 'person-add' }
   ];
   rootPage: any;
 
@@ -103,7 +104,6 @@ export class ConferenceApp {
     }
 
     if (page.logsOut === true) {
-      // Give the menu time to close before changing to logged out
       setTimeout(() => {
         this.userData.logout();
       }, 1000);

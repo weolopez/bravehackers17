@@ -6,6 +6,7 @@ import { NavController } from 'ionic-angular';
 import { SignupPage } from '../signup/signup';
 import { TabsPage } from '../tabs/tabs';
 import { UserData } from '../../providers/user-data';
+import { AngularFire } from 'angularfire2';
 
 
 @Component({
@@ -13,18 +14,24 @@ import { UserData } from '../../providers/user-data';
   templateUrl: 'login.html'
 })
 export class LoginPage {
-  login: {username?: string, password?: string} = {};
+  login: { username?: string, password?: string } = {};
   submitted = false;
 
-  constructor(public navCtrl: NavController, public userData: UserData) { }
+  constructor(public navCtrl: NavController, af: AngularFire, public userData: UserData) {
+  }
 
   onLogin(form: NgForm) {
     this.submitted = true;
 
     if (form.valid) {
-      this.userData.login(this.login.username);
-      this.navCtrl.push(TabsPage);
+      this.userData.signInWithGitHub().then(() => this.onSignInSuccess())
     }
+  }
+
+  private onSignInSuccess(): void {
+    console.log("Facebook display name ", this.userData.displayName());
+    this.userData.login(this.userData.displayName());
+    this.navCtrl.push(TabsPage);
   }
 
   onSignup() {

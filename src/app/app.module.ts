@@ -26,6 +26,15 @@ import { UserData } from '../providers/user-data';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
+import { AngularFireModule } from 'angularfire2';
+
+export const firebaseConfig = {
+    apiKey: "AIzaSyDQ1wWxzlqkGMuB6bL4bQmeyVH7-OfDgzM",
+    authDomain: "bravehackers17.firebaseapp.com",
+    databaseURL: "https://bravehackers17.firebaseio.com",
+    storageBucket: "bravehackers17.appspot.com",
+    messagingSenderId: "236868911507"
+};
 
 @NgModule({
   declarations: [
@@ -47,7 +56,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
   ],
   imports: [
     IonicModule.forRoot(ConferenceApp),
-		IonicStorageModule.forRoot()
+		IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
