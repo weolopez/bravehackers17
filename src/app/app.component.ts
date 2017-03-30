@@ -18,6 +18,8 @@ import { SupportPage } from '../pages/support/support';
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import { CalendarPage } from "../pages/calendar/calendar";
+import { ApiaiService } from './services/apiai.service';
+
 
 export interface PageInterface {
   title: string;
@@ -30,7 +32,8 @@ export interface PageInterface {
 }
 
 @Component({
-  templateUrl: 'app.template.html'
+  templateUrl: 'app.template.html',
+  providers: [ApiaiService]
 })
 export class ConferenceApp {
   // the root nav is a child of the root app component

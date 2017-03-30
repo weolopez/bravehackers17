@@ -11,6 +11,7 @@ import 'rxjs/add/observable/of';
 import {AngularFire, FirebaseObjectObservable} from 'angularfire2';
 
 
+
 @Injectable()
 export class ConferenceData {
   data: any;

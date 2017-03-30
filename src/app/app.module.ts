@@ -20,6 +20,7 @@ import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
+import { MrtdataPage } from '../pages/mrtdata/mrtdata';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -29,6 +30,9 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AngularFireModule } from 'angularfire2';
 import { TinymceModule } from 'angular2-tinymce';
+
+import { ChatBubble } from '../pages/components/chatBubble/chatBubble';
+import {JsonpModule} from '@angular/http';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDQ1wWxzlqkGMuB6bL4bQmeyVH7-OfDgzM",
@@ -55,14 +59,16 @@ export const firebaseConfig = {
     SpeakerListPage,
     TabsPage,
     TutorialPage,
+    MrtdataPage,
+    ChatBubble,
     SupportPage
   ],
   imports: [
     IonicModule.forRoot(ConferenceApp),
 		IonicStorageModule.forRoot(),
     TinymceModule.withConfig({
-    })
-,
+    }),
+    JsonpModule,
     AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],
@@ -82,7 +88,8 @@ export const firebaseConfig = {
     SpeakerListPage,
     TabsPage,
     TutorialPage,
-    SupportPage
+    SupportPage,
+    MrtdataPage
   ],
   providers: [
     ConferenceData,

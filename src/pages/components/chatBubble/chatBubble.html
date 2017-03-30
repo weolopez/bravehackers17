@@ -1,0 +1,9 @@
+<div class="chatBubble">
+    <img class="profile-pic {{msg.position}}" src="{{msg.picture}}">
+    <div class="chat-bubble {{msg.position}}">
+      <div class="message">{{msg.content}}</div>
+      <img src="{{msg.img}}">
+      <a *ngIf="msg.article" ion-item href="{{msg.article}}" >{{msg.name}}</a>
+  
+    </div>
+</div>
