@@ -17,6 +17,7 @@ import { SupportPage } from '../pages/support/support';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
+import { CalendarPage } from "../pages/calendar/calendar";
 
 export interface PageInterface {
   title: string;
@@ -41,9 +42,11 @@ export class ConferenceApp {
   // the login page disables the left menu
   appPages: PageInterface[] = [
     { title: 'Schedule', component: TabsPage, tabComponent: SchedulePage, icon: 'calendar' },
-    { title: 'Speakers', component: TabsPage, tabComponent: SpeakerListPage, index: 1, icon: 'contacts' },
-    { title: 'Map', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
-    { title: 'About', component: TabsPage, tabComponent: AboutPage, index: 3, icon: 'information-circle' }
+    { title: 'Calendar', component: CalendarPage, icon: 'calendar' },
+    { title: 'Movies', component: TabsPage, tabComponent: SpeakerListPage, index: 1, icon: 'videocam' },
+    { title: 'Theaters', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
+    { title: 'Posters', component: TabsPage, tabComponent: SpeakerListPage, index: 3, icon: 'film' },
+    { title: 'About', component: TabsPage, tabComponent: AboutPage, index: 4, icon: 'information-circle' }
   ];
   loggedInPages: PageInterface[] = [
     { title: 'Account', component: AccountPage, icon: 'person' },

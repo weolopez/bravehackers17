@@ -6,6 +6,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { ConferenceApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
+import { CalendarPage } from '../pages/calendar/calendar';
 import { PopoverPage } from '../pages/about-popover/about-popover';
 import { AccountPage } from '../pages/account/account';
 import { LoginPage } from '../pages/login/login';
@@ -27,6 +28,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AngularFireModule } from 'angularfire2';
+import { TinymceModule } from 'angular2-tinymce';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDQ1wWxzlqkGMuB6bL4bQmeyVH7-OfDgzM",
@@ -39,6 +41,7 @@ export const firebaseConfig = {
 @NgModule({
   declarations: [
     ConferenceApp,
+    CalendarPage,
     AboutPage,
     AccountPage,
     LoginPage,
@@ -57,12 +60,16 @@ export const firebaseConfig = {
   imports: [
     IonicModule.forRoot(ConferenceApp),
 		IonicStorageModule.forRoot(),
+    TinymceModule.withConfig({
+    })
+,
     AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
     ConferenceApp,
     AboutPage,
+    CalendarPage,
     AccountPage,
     LoginPage,
     MapPage,
