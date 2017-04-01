@@ -14,6 +14,7 @@ import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SchedulePage } from '../pages/schedule/schedule';
 import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { SupportPage } from '../pages/support/support';
+import { HomePage } from "../pages/home/home";
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
@@ -46,6 +47,7 @@ export class ConferenceApp {
   appPages: PageInterface[] = [
     { title: 'Schedule', component: TabsPage, tabComponent: SchedulePage, icon: 'calendar' },
     { title: 'Calendar', component: CalendarPage, icon: 'calendar' },
+    { title: 'Demo', component: HomePage, icon: 'calendar' },
     { title: 'Movies', component: TabsPage, tabComponent: SpeakerListPage, index: 1, icon: 'videocam' },
     { title: 'Theaters', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
     { title: 'Posters', component: TabsPage, tabComponent: SpeakerListPage, index: 3, icon: 'film' },
@@ -81,6 +83,7 @@ export class ConferenceApp {
         } else {
           this.rootPage = TutorialPage;
         }
+        this.rootPage = SpeakerListPage;
         this.platformReady()
       })
 

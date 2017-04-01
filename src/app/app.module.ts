@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, LOCALE_ID } from '@angular/core';
 
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
@@ -21,18 +21,21 @@ import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
 import { MrtdataPage } from '../pages/mrtdata/mrtdata';
+import { ChatBubble } from '../pages/components/chatBubble/chatBubble';
+import { HomePage } from '../pages/home/home';
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
+import { MovieData } from '../providers/movie-data';
 
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { SplashScreen } from '@ionic-native/splash-screen';
 
 import { AngularFireModule } from 'angularfire2';
 import { TinymceModule } from 'angular2-tinymce';
+import { JsonpModule } from '@angular/http';
+import { NgCalendarModule  } from 'ionic2-calendar';
 
-import { ChatBubble } from '../pages/components/chatBubble/chatBubble';
-import {JsonpModule} from '@angular/http';
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDQ1wWxzlqkGMuB6bL4bQmeyVH7-OfDgzM",
@@ -61,9 +64,11 @@ export const firebaseConfig = {
     TutorialPage,
     MrtdataPage,
     ChatBubble,
-    SupportPage
+    SupportPage,
+    HomePage
   ],
-  imports: [
+  imports: [      
+    NgCalendarModule,
     IonicModule.forRoot(ConferenceApp),
 		IonicStorageModule.forRoot(),
     TinymceModule.withConfig({
@@ -89,13 +94,17 @@ export const firebaseConfig = {
     TabsPage,
     TutorialPage,
     SupportPage,
-    MrtdataPage
+    MrtdataPage,
+    HomePage
+       
   ],
   providers: [
     ConferenceData,
     UserData,
+    MovieData,
     InAppBrowser,
-    SplashScreen
+    SplashScreen,
+    { provide: LOCALE_ID, useValue: undefined }
   ]
 })
 export class AppModule { }
