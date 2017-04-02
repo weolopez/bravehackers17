@@ -34,7 +34,8 @@ import { SplashScreen } from '@ionic-native/splash-screen';
 import { AngularFireModule } from 'angularfire2';
 import { TinymceModule } from 'angular2-tinymce';
 import { JsonpModule } from '@angular/http';
-import { NgCalendarModule  } from 'ionic2-calendar';
+import { NgCalendarModule } from 'ionic2-calendar';
+import { M2EService } from "../providers/m2e.service";
 
 
 export const firebaseConfig = {
@@ -101,6 +102,7 @@ export const firebaseConfig = {
   providers: [
     ConferenceData,
     UserData,
+    M2EService,
     MovieData,
     InAppBrowser,
     SplashScreen,

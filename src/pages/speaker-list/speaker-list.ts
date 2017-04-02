@@ -8,12 +8,14 @@ import { ConferenceData } from '../../providers/conference-data';
 import { SessionDetailPage } from '../session-detail/session-detail';
 import { SpeakerDetailPage } from '../speaker-detail/speaker-detail';
 import { MovieData } from '../../providers/movie-data';
+import { M2EService } from "../../providers/m2e.service";
 
 @Component({
   selector: 'page-speaker-list',
   templateUrl: 'speaker-list.html'
 })
 export class SpeakerListPage {
+    m2eData: any;
   actionSheet: ActionSheet;
   speakers: any[] = [];
   fan: any;
@@ -26,12 +28,20 @@ export class SpeakerListPage {
     public movieData: MovieData,
     public config: Config,
     public inAppBrowser: InAppBrowser,
-    public af: AngularFire
+    public af: AngularFire,
+    public m2e: M2EService
   ) { 
     this.movies = af.database.list('/movies');
+
     this.movieData.loadRSS('comingsoonmovies')
         .subscribe( data => this.setMovies(data.json()));   
-    this.items = af.database.list('/messages'); 
+
+    this.items = af.database.list('/messages');   
+
+    m2e.getM2E().subscribe(
+      data => this.m2eData = data.json()
+      //console.dir(data)
+      );
   }
   movieSave(data) {
   /*  if (this.movies === undefined) {
