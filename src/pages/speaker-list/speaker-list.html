@@ -16,16 +16,20 @@
     </span>
   </section>
   
-    <ul>
-    <li *ngFor="let item of items | async">
-      <input type="text" #updatetext [value]="item.text" />
-      <button (click)="updateItem(item.$key, updatetext.value)">Update</button>
-      <button (click)="deleteItem(item.$key)">Delete</button>
-    </li>
-  </ul>
-  <input type="text" #newitem />
-  <button (click)="addItem(newitem.value)">Add</button>
-  <button (click)="deleteEverything()">Delete All</button>
 
-<p>{{ m2eData | json}}</p>
+    <form (ngSubmit)="getDeviceData()">
+      <ion-item>
+        <ion-label>Device ID</ion-label>
+        <ion-input type="url" [(ngModel)]="url" name="URL"></ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Device Key</ion-label>
+        <ion-input type="text" [(ngModel)]="key" name="key"></ion-input>
+      </ion-item>
+      <button ion-button type="submit" block>Get Data</button>
+    </form>
+
+
+
+<pre>{{m2eData}}</pre>
 </ion-content>

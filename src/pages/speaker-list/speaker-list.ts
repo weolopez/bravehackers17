@@ -21,6 +21,8 @@ export class SpeakerListPage {
   fan: any;
   movies: any;
   items: FirebaseListObservable<any>;
+    public url ='9f02f28d67fac9f23933ba44e6093e31';
+    public key = 'c7a04867e5c3afe472c34bcd09507037';
   constructor(
     public actionSheetCtrl: ActionSheetController,
     public navCtrl: NavController,
@@ -38,8 +40,11 @@ export class SpeakerListPage {
 
     this.items = af.database.list('/messages');   
 
-    m2e.getM2E().subscribe(
-      data => this.m2eData = data.json()
+  }
+
+  getDeviceData() {
+    this.m2e.getM2E(this.url, this.key).subscribe(
+      data => this.m2eData = JSON.stringify(data.json(), undefined, 4)
       //console.dir(data)
       );
   }
@@ -149,4 +154,25 @@ export class SpeakerListPage {
 
     actionSheet.present();
   }
+  syntaxHighlight(json) {
+    if (typeof json != 'string') {
+         json = JSON.stringify(json, undefined, 2);
+    }
+    json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+    return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
+        var cls = 'number';
+        if (/^"/.test(match)) {
+            if (/:$/.test(match)) {
+                cls = 'key';
+            } else {
+                cls = 'string';
+            }
+        } else if (/true|false/.test(match)) {
+            cls = 'boolean';
+        } else if (/null/.test(match)) {
+            cls = 'null';
+        }
+        return '<span class="' + cls + '">' + match + '</span>';
+    });
+}
 }

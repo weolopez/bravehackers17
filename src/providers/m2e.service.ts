@@ -9,7 +9,7 @@ import {AngularFire, FirebaseObjectObservable} from 'angularfire2';
 
 export class M2EService{
     accessToken: String;
-    public m2eurl ='https://api-m2x.att.com/v2/devices/9f02f28d67fac9f23933ba44e6093e31';
+    public m2eurl ='https://api-m2x.att.com/v2/devices/';
     public key = 'c7a04867e5c3afe472c34bcd09507037';
     private selectedMovie: any;
     private posterid = 'blainetest';
@@ -17,13 +17,13 @@ export class M2EService{
     constructor(private http: Http, private af: AngularFire) {
     }
 
-    getM2E() {
+    getM2E(url, key) {
 //      return this.af.database.object('/posters/'+this.posterid)
 
         let headers = new Headers({ 'Content-Type': 'application/json; charset=utf-8',
-                                    "X-M2X-KEY": this.key });
+                                    "X-M2X-KEY": key });
         let options = new RequestOptions({ headers: headers });
-        return this.http.get(this.m2eurl, options)
+        return this.http.get(this.m2eurl+url, options)
             .catch(this.handleError);
     }
 
