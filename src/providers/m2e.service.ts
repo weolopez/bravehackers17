@@ -21,10 +21,10 @@ export class M2EService {
         )
     }
 
-    get() {
-        return this.getDetails(this.poster.m2eid, this.poster.m2ekey);
-    }
-    getData(id, key) {
+    getData(id: string = this.poster.m2eid, key: string = this.poster.m2ekey) {
+        if (id===undefined) id = this.poster.m2eid;
+        if (key===undefined) key = this.poster.m2ekey;
+
         let headers = new Headers({ 'Content-Type': 'application/json; charset=utf-8',
                                     "X-M2X-KEY": key });
         let options = new RequestOptions({ headers: headers });
@@ -32,7 +32,10 @@ export class M2EService {
             .catch(this.handleError);
     }
 
-    getDetails(id, key) {
+    getDetails(id: string = this.poster.m2eid, key: string = this.poster.m2ekey) {
+        if (id===undefined) id = this.poster.m2eid;
+        if (key===undefined) key = this.poster.m2ekey;
+
         let headers = new Headers({ 'Content-Type': 'application/json; charset=utf-8',
                                     "X-M2X-KEY": key });
         let options = new RequestOptions({ headers: headers });
@@ -40,10 +43,8 @@ export class M2EService {
             .catch(this.handleError);
     }
 
-    postData(data) {
-        return this.postM2E(this.poster.m2eid, this.poster.m2ekey, data);
-    }
-    postM2E(id, key, data) {
+    postData(data: any, id: string = this.poster.m2eid, key: string = this.poster.m2ekey) {
+
         let headers = new Headers({ 'Content-Type': 'application/json; charset=utf-8',
                                     "X-M2X-KEY": key });
         let options = new RequestOptions({ headers: headers });

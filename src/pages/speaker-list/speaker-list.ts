@@ -48,12 +48,6 @@ export class SpeakerListPage {
     )
   }
   getDeviceData() {
-    if (this.url.length < 1) {
-      this.m2e.get().subscribe(
-        data => this.m2eData = JSON.stringify(data.json(), undefined, 4)
-      )
-    }
-    else {
       if (this.type === 'data')
         this.m2e.getData(this.url, this.key).subscribe(
            data => this.m2eData = JSON.stringify(data.json(), undefined, 4)
@@ -64,7 +58,6 @@ export class SpeakerListPage {
            data => this.m2eData = JSON.stringify(data.json(), undefined, 4)
            //console.dir(data)
         );
-    }
   }
   movieSave(data) {
     /*  if (this.movies === undefined) {
