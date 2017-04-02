@@ -16,13 +16,13 @@ import { M2EService } from "../../providers/m2e.service";
 })
 export class SpeakerListPage {
   m2eData: any;
-  actionSheet: ActionSheet;
-  speakers: any[] = [];
-  fan: any;
+  actionSheet: ActionSheet; speakers: any[] = []; fan: any;
   movies: any;
   items: FirebaseListObservable<any>;
   public url = '9f02f28d67fac9f23933ba44e6093e31';
   public key = 'c7a04867e5c3afe472c34bcd09507037';
+  public type: any;
+  data: any;
   constructor(
     public actionSheetCtrl: ActionSheetController,
     public navCtrl: NavController,
@@ -42,16 +42,29 @@ export class SpeakerListPage {
 
   }
 
+  postDeviceData() {
+    this.m2e.postData(this.data).subscribe(
+        data => this.m2eData = JSON.stringify(data.json(), undefined, 4)
+    )
+  }
   getDeviceData() {
-    if (this.url.length < 1)
+    if (this.url.length < 1) {
       this.m2e.get().subscribe(
         data => this.m2eData = JSON.stringify(data.json(), undefined, 4)
       )
-    else
-      this.m2e.getM2E(this.url, this.key).subscribe(
-        data => this.m2eData = JSON.stringify(data.json(), undefined, 4)
-        //console.dir(data)
-      );
+    }
+    else {
+      if (this.type === 'data')
+        this.m2e.getData(this.url, this.key).subscribe(
+           data => this.m2eData = JSON.stringify(data.json(), undefined, 4)
+           //console.dir(data)
+        );
+      else 
+        this.m2e.getDetails(this.url, this.key).subscribe(
+           data => this.m2eData = JSON.stringify(data.json(), undefined, 4)
+           //console.dir(data)
+        );
+    }
   }
   movieSave(data) {
     /*  if (this.movies === undefined) {

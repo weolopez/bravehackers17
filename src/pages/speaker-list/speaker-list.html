@@ -7,29 +7,45 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content *ngIf="movies" class="outer-content speaker-list" >
-  <section *ngFor="let f of movies | async" >
+<ion-content *ngIf="movies" class="outer-content speaker-list">
+  <section *ngFor="let f of movies | async">
     <span>
       <p (click)="f.show=!f.show">{{f.title}}</p>
       <article *ngIf="f.show" [innerHTML]="f.content">
       </article>
     </span>
   </section>
-  
 
-    <form (ngSubmit)="getDeviceData()">
+
+  <form (ngSubmit)="getDeviceData()">
+    <ion-item>
+      <ion-label>Device ID</ion-label>
+      <ion-input type="text" [(ngModel)]="url" name="URL"></ion-input>
+    </ion-item>
+    <ion-item>
+      <ion-label>Device Key</ion-label>
+      <ion-input type="text" [(ngModel)]="key" name="key"></ion-input>
+    </ion-item>
+    <ion-list radio-group [(ngModel)]="type" name="type">
       <ion-item>
-        <ion-label>Device ID</ion-label>
-        <ion-input type="text" [(ngModel)]="url" name="URL"></ion-input>
+        <ion-label>Details</ion-label>
+        <ion-radio value="details" checked></ion-radio>
       </ion-item>
       <ion-item>
-        <ion-label>Device Key</ion-label>
-        <ion-input type="text" [(ngModel)]="key" name="key"></ion-input>
+        <ion-label>Data</ion-label>
+        <ion-radio value="data"></ion-radio>
       </ion-item>
-      <button ion-button type="submit" block>Get Data</button>
-    </form>
+    </ion-list>
+    <button ion-button type="submit" block>Get Data</button>
+  </form>
 
+  <form (ngSubmit)="postDeviceData()">
+    <ion-item>
+      <ion-label>Data to Post</ion-label>
+      <ion-textarea [(ngModel)]="data" name="data"> </ion-textarea>
+    </ion-item>
+    <button ion-button type="submit" block>Get Data</button>
+  </form>
 
-
-<pre>{{m2eData}}</pre>
+  <pre>{{m2eData}}</pre>
 </ion-content>
