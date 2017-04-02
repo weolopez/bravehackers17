@@ -15,14 +15,14 @@ import { M2EService } from "../../providers/m2e.service";
   templateUrl: 'speaker-list.html'
 })
 export class SpeakerListPage {
-    m2eData: any;
+  m2eData: any;
   actionSheet: ActionSheet;
   speakers: any[] = [];
   fan: any;
   movies: any;
   items: FirebaseListObservable<any>;
-    public url ='9f02f28d67fac9f23933ba44e6093e31';
-    public key = 'c7a04867e5c3afe472c34bcd09507037';
+  public url = '9f02f28d67fac9f23933ba44e6093e31';
+  public key = 'c7a04867e5c3afe472c34bcd09507037';
   constructor(
     public actionSheetCtrl: ActionSheetController,
     public navCtrl: NavController,
@@ -32,40 +32,45 @@ export class SpeakerListPage {
     public inAppBrowser: InAppBrowser,
     public af: AngularFire,
     public m2e: M2EService
-  ) { 
+  ) {
     this.movies = af.database.list('/movies');
 
     this.movieData.loadRSS('comingsoonmovies')
-        .subscribe( data => this.setMovies(data.json()));   
+      .subscribe(data => this.setMovies(data.json()));
 
-    this.items = af.database.list('/messages');   
+    this.items = af.database.list('/messages');
 
   }
 
   getDeviceData() {
-    this.m2e.getM2E(this.url, this.key).subscribe(
-      data => this.m2eData = JSON.stringify(data.json(), undefined, 4)
-      //console.dir(data)
+    if (this.url.length < 1)
+      this.m2e.get().subscribe(
+        data => this.m2eData = JSON.stringify(data.json(), undefined, 4)
+      )
+    else
+      this.m2e.getM2E(this.url, this.key).subscribe(
+        data => this.m2eData = JSON.stringify(data.json(), undefined, 4)
+        //console.dir(data)
       );
   }
   movieSave(data) {
-  /*  if (this.movies === undefined) {
+    /*  if (this.movies === undefined) {
+        return false;
+      };
+  
+      if (this.movies.find(function(m){
+        return m.title === data.title;
+      }).length > 0) return true;
+      else this.movies.push({title: 'data.title'}).catch(err=>this.movies=null);
       return false;
-    };
-
-    if (this.movies.find(function(m){
-      return m.title === data.title;
-    }).length > 0) return true;
-    else this.movies.push({title: 'data.title'}).catch(err=>this.movies=null);
-    return false;
-  */   
+    */
   }
   setMovies(data) {
-    this.fan = data;    
+    this.fan = data;
     this.fan.items.forEach(element => {
-      let m = this.movies.find(movie=>movie===element);
+      let m = this.movies.find(movie => movie === element);
       console.dir(m);
-      if (m.length === 0 ) this.movies.push(element);
+      if (m.length === 0) this.movies.push(element);
       else {
         console.log(m);
       }
@@ -79,8 +84,8 @@ export class SpeakerListPage {
   updateItem(key: string, newText: string) {
     this.items.update(key, { text: newText });
   }
-  deleteItem(key: string) {    
-    this.items.remove(key); 
+  deleteItem(key: string) {
+    this.items.remove(key);
   }
   deleteEverything() {
     this.items.remove();
@@ -156,23 +161,23 @@ export class SpeakerListPage {
   }
   syntaxHighlight(json) {
     if (typeof json != 'string') {
-         json = JSON.stringify(json, undefined, 2);
+      json = JSON.stringify(json, undefined, 2);
     }
     json = json.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
     return json.replace(/("(\\u[a-zA-Z0-9]{4}|\\[^u]|[^\\"])*"(\s*:)?|\b(true|false|null)\b|-?\d+(?:\.\d*)?(?:[eE][+\-]?\d+)?)/g, function (match) {
-        var cls = 'number';
-        if (/^"/.test(match)) {
-            if (/:$/.test(match)) {
-                cls = 'key';
-            } else {
-                cls = 'string';
-            }
-        } else if (/true|false/.test(match)) {
-            cls = 'boolean';
-        } else if (/null/.test(match)) {
-            cls = 'null';
+      var cls = 'number';
+      if (/^"/.test(match)) {
+        if (/:$/.test(match)) {
+          cls = 'key';
+        } else {
+          cls = 'string';
         }
-        return '<span class="' + cls + '">' + match + '</span>';
+      } else if (/true|false/.test(match)) {
+        cls = 'boolean';
+      } else if (/null/.test(match)) {
+        cls = 'null';
+      }
+      return '<span class="' + cls + '">' + match + '</span>';
     });
-}
+  }
 }
