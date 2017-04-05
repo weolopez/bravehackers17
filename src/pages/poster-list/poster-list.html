@@ -1,0 +1,28 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Poster List</ion-title>
+    <!--ion-buttons end>
+      <button ion-button item-left (click)="edit()">Add</button>
+    </ion-buttons-->
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="posters">
+
+    <!-- Sliding item -->
+    <ion-item-sliding  *ngFor="let item of posters | async">
+    <ion-item >
+    <ion-icon name="star" item-left></ion-icon>
+      {{item.m2eid}}
+      <button ion-button item-right (click)="edit(item)">edit</button>
+    </ion-item>
+      <ion-item-options>
+        <button ion-button color="primary" (click)="edit(item)">edit</button>
+      </ion-item-options>
+    </ion-item-sliding>
+  </ion-list>
+</ion-content>

@@ -20,6 +20,8 @@ import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
 import { CalendarPage } from "../pages/calendar/calendar";
 import { ApiaiService } from './services/apiai.service';
+import { PosterListPage } from "../pages/poster-list/poster-list";
+import { MovieListPage } from "../pages/movie-list/movie-list";
 
 
 export interface PageInterface {
@@ -45,12 +47,17 @@ export class ConferenceApp {
   // the left menu only works after login
   // the login page disables the left menu
   appPages: PageInterface[] = [
+/**
+ * 
     { title: 'Schedule', component: TabsPage, tabComponent: SchedulePage, icon: 'calendar' },
     { title: 'Calendar', component: CalendarPage, icon: 'calendar' },
     { title: 'Demo', component: HomePage, icon: 'calendar' },
     { title: 'Movies', component: TabsPage, tabComponent: SpeakerListPage, index: 1, icon: 'videocam' },
     { title: 'Theaters', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
-    { title: 'Posters', component: TabsPage, tabComponent: SpeakerListPage, index: 3, icon: 'film' },
+    { title: 'Posters', component: TabsPage, tabComponent: PosterListPage, index: 3, icon: 'film' },
+ */
+    { title: 'Posters', component: PosterListPage, icon: 'film' },
+    { title: 'Movies', component: MovieListPage, icon: 'videocam' },
     { title: 'About', component: TabsPage, tabComponent: AboutPage, index: 4, icon: 'information-circle' }
   ];
   loggedInPages: PageInterface[] = [
@@ -83,7 +90,7 @@ export class ConferenceApp {
         } else {
           this.rootPage = TutorialPage;
         }
-        this.rootPage = SpeakerListPage;
+        this.rootPage = PosterListPage;
         this.platformReady()
       })
 

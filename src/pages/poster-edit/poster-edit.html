@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons begin>
+    <button ion-button (click)="nav.pop()">
+      <ion-icon name="back"></ion-icon>
+    </button>
+    </ion-buttons>
+    <ion-title>Edit Poster</ion-title>
+    <ion-buttons end>
+      <button ion-button 
+              *ngIf="!editPoster"
+              item-left 
+              (click)="editPoster=!editPoster">Edit</button>
+      <button ion-button 
+              *ngIf="editPoster"
+              item-left 
+              (click)="editPoster=!editPoster;poster.set(copy)">Save
+              </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <pre 
+       *ngIf="!editPoster"
+  >
+  {{poster | async | json}}
+  </pre>
+  <textarea id="edit-area"
+            *ngIf="editPoster"
+            #text 
+            (change)="copy = text.value" 
+            [value]='copy | json'
+            >
+  </textarea>
+</ion-content>

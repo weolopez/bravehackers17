@@ -36,6 +36,11 @@ import { TinymceModule } from 'angular2-tinymce';
 import { JsonpModule } from '@angular/http';
 import { NgCalendarModule } from 'ionic2-calendar';
 import { M2EService } from "../providers/m2e.service";
+import { PosterListPage } from "../pages/poster-list/poster-list";
+import { PosterEditPage } from "../pages/poster-edit/poster-edit";
+import { PosterService } from "../providers/poster.service";
+import { MovieListPage } from "../pages/movie-list/movie-list";
+import { MovieEditPage } from "../pages/movie-edit/movie-edit";
 
 
 export const firebaseConfig = {
@@ -66,6 +71,10 @@ export const firebaseConfig = {
     MrtdataPage,
     ChatBubble,
     SupportPage,
+    MovieListPage,
+    MovieEditPage,
+    PosterListPage,
+    PosterEditPage,
     HomePage
   ],
   imports: [      
@@ -96,6 +105,10 @@ export const firebaseConfig = {
     TutorialPage,
     SupportPage,
     MrtdataPage,
+    MovieListPage,
+    MovieEditPage,
+    PosterListPage,
+    PosterEditPage,
     HomePage
        
   ],
@@ -103,6 +116,7 @@ export const firebaseConfig = {
     ConferenceData,
     UserData,
     M2EService,
+    PosterService,
     MovieData,
     InAppBrowser,
     SplashScreen,
