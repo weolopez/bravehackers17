@@ -17,26 +17,36 @@
     <img src="assets/img/ionic-logo-white.svg" alt="ionic logo">
   </div>
 
-  <div padding class="about-info">
-    <span>
-    <ion-slides id="slides">
-  <ion-slide *ngFor="let p of posters">
-    <img class="guy" [src]="'assets/img/'+p">
-  </ion-slide>
-</ion-slides>
-    <p>
-      Create an interactive Movie Poster app that can replace Big Posters available in kiosks at Movie theaters. Movie Poster can be deployed in the theater lobby. It contains sensors to detect Audio, Facial  and Human gestures. Created a Management App to push content to multiple Movie Poster Apps remotely from a centralized location at headquarters. Movie Poster and Management Apps concept can be extended to other industries like Quick Serving Restaurants, Sports stadiums, Theme Parks and etc. 
-    </p>
+  <section>
+      <article id=slides>
+        <ion-slides slidesPerView="1" autoplay="1000" loop="true">
+          <ion-slide *ngFor="let p of posters">
+            <img class="guy" [src]="'assets/img/'+p">
+          </ion-slide>
+        </ion-slides>
+      </article>
+      <article id="about">
+        <p>
+          Digital interactive posters can replace posters currently deployed in kiosks at movie theaters, malls, bus stops... 
+          The device contains sensors to detect Audio, Facial and Human gestures. The management
+          App can push content to multiple Movie Poster Apps remotely from a centralized location at headquarters. Movie Poster
+          and Management Apps concept can be extended to other industries like Quick Serving Restaurants, Sports stadiums,
+          Theme Parks and etc.
+        </p>
 
-    <ul>
-      <li>Implemented voice recognition feature to allow customers to ask movie related questions.</li>
-      <li>Captured customer’s speech and converted into Text using Speech-2-Text API. Then, analyzed the text using Artificial Intelligence (AI) techniques provided by Google.  Implemented 8 unique responses based on customer’s questions. 
-</li>
-      <li>Displayed responses (like trailer, ratings, timings) on Movie App based on customer’s questions. </li>
-      <li>Integrated Gesture sensor with kiosk monitor.  Converted Human hand gestures into programmable events. (up-key, down-key, left-key and right-key events)</li>
-      <li>Displayed a menu which can be controlled without touching the screen.  Menu options can be selected with hand Gestures without touching the screen</li>
-      <li>Created multiple screens to display main poster, Trailer, Ratings, show times, Release date and purchase tickets</li>
-    </ul>
-    </span>
-  </div>
+        <ul>
+          <li>Implemented voice recognition feature to allow customers to ask movie related questions.</li>
+          <li>Captured customer’s speech and converted into Text using Speech-2-Text API. Then, analyzed the text using Artificial
+            Intelligence (AI) techniques provided by Google. Implemented 8 unique responses based on customer’s questions.
+          </li>
+          <li>Displayed responses (like trailer, ratings, timings) on Movie App based on customer’s questions. </li>
+          <li>Integrated Gesture sensor with kiosk monitor. Converted Human hand gestures into programmable events. (up-key,
+            down-key, left-key and right-key events)</li>
+          <li>Displayed a menu which can be controlled without touching the screen. Menu options can be selected with hand Gestures
+            without touching the screen</li>
+          <li>Created multiple screens to display main poster, Trailer, Ratings, show times, Release date and purchase tickets</li>
+        </ul>
+      </article>
+  </section>
+
 </ion-content>
