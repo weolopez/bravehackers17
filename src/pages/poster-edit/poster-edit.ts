@@ -16,19 +16,10 @@ export class PosterEditPage {
     private navParams: NavParams
   ) {
     this.poster = af.database.object('/posters/' + navParams.data.$key);
-    this.poster.subscribe(
-      c=>this.copy=c
-     // c=>console.dir(c)
-    )
+    this.poster.subscribe( c=>this.copy=c)
   }
   save() {
-    console.dir(this.copy)
-    this.poster.set(this.copy)
-      .then(
-        o=>this.print(o)
-      )
+    this.poster.set(JSON.parse(this.copy));
   }
-  print(o) {
-    console.dir(o)
-  }
+  
 }

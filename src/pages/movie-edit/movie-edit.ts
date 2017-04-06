@@ -9,19 +9,26 @@ import { ActionSheet, ActionSheetController, Config, NavController, NavParams } 
 })
 export class MovieEditPage {
   public movie: FirebaseObjectObservable<any>;
+  public copy=''
   constructor(
     private af: AngularFire,
     private navParams: NavParams
   ) {
+
     let key = '';
+    
     if (!navParams.data.$key) key = this.newPoster();
     else key = navParams.data.$key;
-    this.movie = af.database.object('/movies/' + key)
+    
+    this.movie = af.database.object('/movies/' + key);
+    this.movie.subscribe( c=>this.copy=c);
+
+    if (!navParams.data.$key) this.movie.update({'key':key});
   }
 
   newPoster() {
     const movies = this.af.database.list('/movies');
-    return movies.push(
+    const key = movies.push(
       {
         "cast": [{
           "avatarUrl": "",
@@ -62,5 +69,9 @@ export class MovieEditPage {
         "year": 2017
       }
     ).key;
+    return key;
+  }
+  save() {
+    this.movie.set(JSON.parse(this.copy));
   }
 }

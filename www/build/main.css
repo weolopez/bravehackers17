@@ -38622,6 +38622,10 @@ ion-navbar.toolbar {
   }
 }
 
+#m2x {
+  margin-left: -9px;
+}
+
 .about-header {
   background-color: #434954;
   padding: 16px;
@@ -39070,35 +39074,6 @@ ion-item[track=navigation] .dot {
 
 .speaker-detail p {
   color: #60646B;
-}
-
-page-speaker-list .scroll-content {
-  background: #EDEDED;
-}
-
-page-speaker-list .speaker-card {
-  height: 100%;
-  display: -webkit-flex;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-flex-direction: column;
-  -ms-flex-direction: column;
-  flex-direction: column;
-}
-
-page-speaker-list .speaker-card ion-card-content {
-  -webkit-flex: 1 1 auto;
-  -ms-flex: 1 1 auto;
-  flex: 1 1 auto;
-}
-
-page-speaker-list .speaker-card ion-card-header .item {
-  padding: 4px 16px;
-}
-
-page-speaker-list .speaker-card ion-card-content {
-  padding-left: 0;
-  padding-right: 0;
 }
 
 .tabbar {

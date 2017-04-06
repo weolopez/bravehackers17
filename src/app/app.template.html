@@ -16,8 +16,10 @@
           Navigate
         </ion-list-header>
         <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">
-          <ion-icon item-left [name]="p.icon" [color]="isActive(p)"></ion-icon>
-          {{p.title}}
+          <ion-icon *ngIf="p.icon!=='m2x'" item-left [name]="p.icon" [color]="isActive(p)">
+          {{p.icon}}
+          </ion-icon>
+          <img *ngIf="p.icon==='m2x'" id="m2x" src="assets/img/m2x.png">
         </button>
       </ion-list>
 
@@ -65,7 +67,13 @@
           Navigate
         </ion-list-header>
         <button ion-item menuClose *ngFor="let p of appPages" (click)="openPage(p)">
-          <ion-icon item-left [name]="p.icon" [color]="isActive(p)"></ion-icon>
+          <ion-icon *ngIf="p.icon!=='m2x'" item-left [name]="p.icon" [color]="isActive(p)">
+          </ion-icon>
+
+          <ion-avatar *ngIf="p.icon==='m2x'" item-left>
+          <img id="m2x" src="assets/img/m2x1.jpg">
+          </ion-avatar>
+
           {{p.title}}
         </button>
       </ion-list>

@@ -16,7 +16,6 @@ import { ScheduleFilterPage } from '../pages/schedule-filter/schedule-filter';
 import { SessionDetailPage } from '../pages/session-detail/session-detail';
 import { SignupPage } from '../pages/signup/signup';
 import { SpeakerDetailPage } from '../pages/speaker-detail/speaker-detail';
-import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SupportPage } from '../pages/support/support';
@@ -35,12 +34,12 @@ import { AngularFireModule } from 'angularfire2';
 import { TinymceModule } from 'angular2-tinymce';
 import { JsonpModule } from '@angular/http';
 import { NgCalendarModule } from 'ionic2-calendar';
-import { M2EService } from "../providers/m2e.service";
 import { PosterListPage } from "../pages/poster-list/poster-list";
 import { PosterEditPage } from "../pages/poster-edit/poster-edit";
 import { PosterService } from "../providers/poster.service";
 import { MovieListPage } from "../pages/movie-list/movie-list";
 import { MovieEditPage } from "../pages/movie-edit/movie-edit";
+import { M2XService } from "../providers/m2x.service";
 
 
 export const firebaseConfig = {
@@ -65,7 +64,6 @@ export const firebaseConfig = {
     SessionDetailPage,
     SignupPage,
     SpeakerDetailPage,
-    SpeakerListPage,
     TabsPage,
     TutorialPage,
     MrtdataPage,
@@ -100,7 +98,6 @@ export const firebaseConfig = {
     SessionDetailPage,
     SignupPage,
     SpeakerDetailPage,
-    SpeakerListPage,
     TabsPage,
     TutorialPage,
     SupportPage,
@@ -115,7 +112,7 @@ export const firebaseConfig = {
   providers: [
     ConferenceData,
     UserData,
-    M2EService,
+    M2XService,
     PosterService,
     MovieData,
     InAppBrowser,

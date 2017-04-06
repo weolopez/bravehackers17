@@ -14,7 +14,7 @@
       <button ion-button 
               *ngIf="editMovie"
               item-left 
-              (click)="save()">Save
+              (click)="editMovie=!editMovie;save()">Save
               </button>
     </ion-buttons>
   </ion-navbar>
@@ -29,7 +29,9 @@
   </pre>
   <textarea id="edit-area"
             *ngIf="editMovie"
-            [value]="movie | async | json"
+            #text 
+            (change)="copy = text.value" 
+            [value]='copy | json'
             >
   </textarea>
 </ion-content>

@@ -17,7 +17,7 @@
     <ion-item-sliding  *ngFor="let item of posters | async">
     <ion-item >
     <ion-icon name="star" item-left></ion-icon>
-      {{item.m2eid}}
+      {{ (item.name)?item.name:item.m2xid}}
       <button ion-button item-right (click)="edit(item)">edit</button>
     </ion-item>
       <ion-item-options>
