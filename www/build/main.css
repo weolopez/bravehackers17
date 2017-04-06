@@ -38641,6 +38641,17 @@ ion-navbar.toolbar {
   padding: 25px 0 20px 0;
 }
 
+#slides {
+  width: 550px;
+  float: right;
+  margin: 0 0 10px 10px;
+}
+
+.guy {
+  width: auto;
+  height: 500px;
+}
+
 .about-info p {
   color: #697072;
   text-align: left;

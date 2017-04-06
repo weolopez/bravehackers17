@@ -10,7 +10,22 @@ import { PopoverPage } from '../about-popover/about-popover';
 })
 export class AboutPage {
   conferenceDate = '2047-05-17';
-
+  public posters = [
+    'guy.jpg',
+    'poster.jpg',
+    'learn.jpg',
+    'activate.jpg',
+    'select.jpg',
+    'trailer.jpg',
+    'show.jpg',
+    'about.jpg',
+    'ratings.jpg',
+    'menu-tickets.jpg',
+    'tickets.jpg',
+    'number.jpg',
+    'purchase.jpg',
+    'code.jpg'
+  ]
   constructor(public popoverCtrl: PopoverController) { }
 
   presentPopover(event: Event) {
