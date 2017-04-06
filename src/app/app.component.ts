@@ -55,13 +55,13 @@ export class ConferenceApp {
     { title: 'Theaters', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
     { title: 'Posters', component: TabsPage, tabComponent: PosterListPage, index: 3, icon: 'film' },
  */
-    { title: 'Posters', component: PosterListPage, icon: 'film' },
-    { title: 'Movies', component: MovieListPage, icon: 'videocam' },
     { title: 'AT&T IoT Platform', component: MovieListPage, icon: 'm2x' },
-    { title: 'About', component: TabsPage, tabComponent: AboutPage, index: 4, icon: 'information-circle' }
+    { title: 'About', component: AboutPage, icon: 'information-circle' }
   ];
   loggedInPages: PageInterface[] = [
     { title: 'Account', component: AccountPage, icon: 'person' },
+    { title: 'Posters', component: PosterListPage, icon: 'film' },
+    { title: 'Movies', component: MovieListPage, icon: 'videocam' },
     { title: 'Support', component: SupportPage, icon: 'help' },
     { title: 'Logout', component: TabsPage, icon: 'log-out', logsOut: true }
   ];
@@ -90,7 +90,7 @@ export class ConferenceApp {
         } else {
           this.rootPage = TutorialPage;
         }
-        this.rootPage = PosterListPage;
+        this.rootPage = AboutPage ;
         this.platformReady()
       })
 
