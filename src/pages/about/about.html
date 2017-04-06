@@ -26,16 +26,45 @@
         </ion-slides>
       </article>
       <article id="about">
+        <h1>About</h1>
         <p>
-          Digital interactive posters can replace posters currently deployed in kiosks at movie theaters, malls, bus stops... 
+          Digital interactive posters can replace posters currently deployed in any location for example movie theaters, malls and public transit. 
           The device contains sensors to detect Audio, Facial and Human gestures. The management
-          App can push content to multiple Movie Poster Apps remotely from a centralized location at headquarters. Movie Poster
-          and Management Apps concept can be extended to other industries like Quick Serving Restaurants, Sports stadiums,
-          Theme Parks and etc.
+          App can push content to multiple Movie Posters remotely from a centralized location. Movie Poster
+          and Management Application concept can be extended to other industries like restaurants, sports stadiums,
+          theme parks. 
         </p>
 
+        <h1>User Experience</h1>
         <ul>
-          <li>Implemented voice recognition feature to allow customers to ask movie related questions.</li>
+          <li>As a potential user walks by the poster can detect their movement and present a screen instructing them on how to activate the device</li>
+          <li>Putting thier hand on the marked motion sensor activates the menu, camera and microphone.</li>
+          <li>The user can either ask in a natural language what they want to do or wave their hand back and forth to change menu options</li>
+          <li>Swiping up on the sensor or via intent analysis of voice recognition a menu item is activated to show additional features</li>
+          <li>Payment is made by face recognition.  When entering the menu a picture is taken and image analysis is performed</li>
+          <li>Once the time and number of tickets are selected a short numeric code is provded to the user to bring to the movie theater usher</li>
+          <li>The usher enters in the short code and the user's picture is presented so she can verify thier identity</li>
+        </ul>
+        <h1>Digital Interactive Poster</h1>
+        <ul>
+          <li>The device contains several pieces of equipment</li>
+          <ul>
+            <li>High Definition TV</li>
+            <li>Raspberry Pi</li>
+            <li>AT&amp;T IoT LTE Module</li>
+            <li>Motion Sensor</li>
+            <li>Webcam</li>
+          </ul>
+          <li>The device is physically installed in any location.</li>
+          <li>Once plugged in the device registers with a REST POST to AT&amp;T M2X device API</li>
+          <li>It is now visible in the Management app and can be assigned a movie.</li>
+          <li>The poster hosts a webserver that a local browser will call to present the Poster Application</li>
+          <li>The applicatioon is distributed using GIT and presented with the Chromium web browser</li>
+          <li>Motion gestures are captured and convereted to keyboard keys that are interpreted by the browser</li>
+          <li>Voice capture and speech to text leverages HTML5 APIs. Text to intent analysis is done via api.ai REST services</li>
+          <li>Bluemix Visual Recognition is used for image analysis and face recognition</li>
+
+          <!--li>Implemented voice recognition feature to allow customers to ask movie related questions.</li>
           <li>Captured customer’s speech and converted into Text using Speech-2-Text API. Then, analyzed the text using Artificial
             Intelligence (AI) techniques provided by Google. Implemented 8 unique responses based on customer’s questions.
           </li>
@@ -44,7 +73,7 @@
             down-key, left-key and right-key events)</li>
           <li>Displayed a menu which can be controlled without touching the screen. Menu options can be selected with hand Gestures
             without touching the screen</li>
-          <li>Created multiple screens to display main poster, Trailer, Ratings, show times, Release date and purchase tickets</li>
+          <li>Created multiple screens to display main poster, Trailer, Ratings, show times, Release date and purchase tickets</li-->
         </ul>
       </article>
   </section>
