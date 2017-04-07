@@ -113,6 +113,10 @@ export class ConferenceApp {
     // the nav component was found using @ViewChild(Nav)
     // reset the nav to remove previous pages and only have this page
     // we wouldn't want the back button to show in this scenario
+    if (page.index===0) {
+      window.open(page.link,'_blank');
+      return;
+    }
     if (page.index) {
       this.nav.setRoot(page.component, { tabIndex: page.index }).catch(() => {
         console.log("Didn't set nav root");
