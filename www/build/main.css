@@ -38659,6 +38659,10 @@ section {
   }
 }
 
+#logo {
+  width: 200px;
+}
+
 @media only screen and (min-width: 640px) {
   #slides {
     margin: 10px;
