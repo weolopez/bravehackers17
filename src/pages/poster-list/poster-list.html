@@ -11,8 +11,19 @@
 </ion-header>
 
 <ion-content>
-  <ion-list *ngIf="posters">
+  <div padding>
+  <ion-segment [(ngModel)]="lists">
+    <ion-segment-button value="firebase" style="color: black">
+      firebase
+    </ion-segment-button>
+    <ion-segment-button value="m2xdb" style="color: black">
+      m2x
+    </ion-segment-button>
+  </ion-segment>
+</div>
 
+<div [ngSwitch]="lists">
+  <ion-list *ngSwitchCase="'firebase'">
     <!-- Sliding item -->
     <ion-item-sliding  *ngFor="let item of posters | async">
     <ion-item >
@@ -21,8 +32,28 @@
       <button ion-button item-right (click)="edit(item)">edit</button>
     </ion-item>
       <ion-item-options>
-        <button ion-button color="primary" (click)="edit(item)">edit</button>
+        <button ion-button color="danger" (click)="delete(item)">delete</button>
+        <!-- button ion-button color="primary" (click)="edit(item)">edit</button-->
+      </ion-item-options>
+    </ion-item-sliding>
+
+  </ion-list>
+
+  <ion-list *ngSwitchCase="'m2xdb'">
+
+    <!-- Sliding item -->
+    <ion-item-sliding  *ngFor="let item of m2xposters ">
+    <ion-item >
+    <ion-icon name="star" item-left></ion-icon>
+      {{ (item.name)?item.name:item.m2xid}}
+      <!--(item.name)?item.name:item.id}}-->
+      <button ion-button item-right (click)="edit(item)">edit</button>
+    </ion-item>
+      <ion-item-options>
+        <button ion-button color="danger" (click)="delete(item)">delete</button>
+        <!-- button ion-button color="primary" (click)="edit(item)">edit</button-->
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
+</div>
 </ion-content>
