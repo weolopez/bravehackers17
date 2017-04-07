@@ -25,8 +25,9 @@ import { MovieListPage } from "../pages/movie-list/movie-list";
 
 export interface PageInterface {
   title: string;
-  component: any;
+  component?: any;
   icon: string;
+  link?: string;
   logsOut?: boolean;
   logsIn?: boolean;
   index?: number;
@@ -55,7 +56,10 @@ export class ConferenceApp {
     { title: 'Theaters', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
     { title: 'Posters', component: TabsPage, tabComponent: PosterListPage, index: 3, icon: 'film' },
  */
-    { title: 'AT&T IoT Platform', component: MovieListPage, icon: 'm2x' },
+    { title: 'AT&T IoT Platform', link: 'http://m2x.att.com', index: 0, icon: 'm2x1.jpg' },
+    { title: 'api.ai intents', link: 'https://console.api.ai/api-client/#/agent/fe732d66-e9b4-4915-8331-31d5bee7266a/intents', index: 0, icon: 'apiai.png' },
+    { title: 'IBM Bluemix', link: 'https://console.ng.bluemix.net/dashboard/apps/', index: 0, icon: 'bluemix.png' },
+    { title: 'Firebase', link: 'https://console.firebase.google.com/project/bravehackers17/database/data', index: 0, icon: 'firebase.png' },
     { title: 'About', component: AboutPage, icon: 'information-circle' }
   ];
   loggedInPages: PageInterface[] = [
