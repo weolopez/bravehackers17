@@ -1,4 +1,4 @@
-import { AngularFire, FirebaseListObservable, FirebaseObjectObservable } from 'angularfire2';
+import { AngularFire, FirebaseListObservable } from 'angularfire2';
 import { Component } from '@angular/core';
 
 import { ActionSheet, ActionSheetController, Config, NavController, NavParams } from 'ionic-angular';
@@ -10,39 +10,37 @@ import { M2XService } from "../../providers/m2x.service";
   templateUrl: 'poster-edit.html'
 })
 export class PosterEditPage {
-  public poster: FirebaseObjectObservable<any>;
+  public movies: FirebaseListObservable<any>;
   public copy;
   public id;
   public metadata;
+  public movie;
   constructor(
     private af: AngularFire,
     private m2x: M2XService,
     private navParams: NavParams
   ) {
     console.dir(navParams.data);
-    if (navParams.data.$key) {
-      this.poster = af.database.object('/posters/' + navParams.data.$key);
-      this.poster.subscribe( c=>this.copy=c)
-    } else {
       this.id = navParams.data.id;
       this.copy = navParams.data;
       console.log(this.id);
       this.m2x.getMetaData(this.id).map(r=>this.metadata=r.json()).subscribe(r=>console.dir(r))
-    }
+      this.movies = af.database.list('/movies');
   }
   edit() {
-    if (!this.poster) {
       if (!this.copy['metadata']) this.copy = 'empty';
       else this.copy = this.copy['metadata'] ;
     console.dir(this.copy);
-    }
   }
   save() {
-    let c = JSON.parse(this.copy);
-    console.log(c);
-    console.log(this.copy);
-    if (this.poster) this.poster.set(JSON.parse(this.copy));
-    else this.m2x.setMetaData(c, this.id)
+    let c={
+      'name': this.copy.name
+    }
+    let m={
+      'movieid': this.movie
+    }
+    console.dir(m);
+    this.m2x.setMetaData(m, this.id)
             .subscribe(r=>
             console.dir(r)
             );
