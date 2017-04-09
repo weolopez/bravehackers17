@@ -37,8 +37,12 @@ export class PosterEditPage {
   }
   save() {
     let c = JSON.parse(this.copy);
+    console.log(c);
+    console.log(this.copy);
     if (this.poster) this.poster.set(JSON.parse(this.copy));
     else this.m2x.setMetaData(c, this.id, this.key)
-            .subscribe(r=>console.dir(r));
+            .subscribe(r=>
+            console.dir(r)
+            );
   }
 }

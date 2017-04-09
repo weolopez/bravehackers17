@@ -35,8 +35,6 @@ export class PosterListPage {
     //poster.remove();
   }
   getName(item) {
-    console.dir(item);
-    //console.dir(JSON.parse(item));
     if (item.location)  if (item.location.name) return item.location.name;
     return item.name;
   }
