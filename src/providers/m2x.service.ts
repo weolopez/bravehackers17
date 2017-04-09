@@ -149,6 +149,16 @@ export class M2XService {
         return this.http.get(this.url + '/' + id + '/metadata', options)
             .catch(this.handleError);
     }
+
+    setDetails(data: any, id: string = this.id, key: string = this.key) {
+        let headers = new Headers({
+            'Content-Type': 'application/json; charset=utf-8',
+            "X-M2X-KEY": key
+        });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.put(this.url + '/' + id , data, options)
+            .catch(this.handleError);
+    }
     postData(data: any, id: string = this.id, key: string = this.key) {
 
         let headers = new Headers({

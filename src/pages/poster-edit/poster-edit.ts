@@ -34,13 +34,15 @@ export class PosterEditPage {
   }
   save() {
     let c={
-      'name': this.copy.name
+      'name': this.copy.name,
+      'visibility': this.copy.visibility,
+      'description': this.copy.description,
+      'serial': this.copy.serial,
+      'metadata' : {
+          'movieid': this.movie
+        }
     }
-    let m={
-      'movieid': this.movie
-    }
-    console.dir(m);
-    this.m2x.setMetaData(m, this.id)
+    this.m2x.setDetails(c, this.id)
             .subscribe(r=>
             console.dir(r)
             );
