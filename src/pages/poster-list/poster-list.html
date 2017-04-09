@@ -16,12 +16,11 @@
     <ion-segment-button value="firebase" style="color: black">
       firebase
     </ion-segment-button>
-    <ion-segment-button value="m2xdb" style="color: black">
+    <ion-segment-button value="m2xdb" style="color: black" [style.visibility]="m2xposters">
       m2x
     </ion-segment-button>
   </ion-segment>
 </div>
-
 <div [ngSwitch]="lists">
   <ion-list *ngSwitchCase="'firebase'">
     <!-- Sliding item -->
@@ -42,10 +41,10 @@
   <ion-list *ngSwitchCase="'m2xdb'">
 
     <!-- Sliding item -->
-    <ion-item-sliding  *ngFor="let item of m2xposters ">
+    <ion-item-sliding   *ngFor="let item of m2xposters">
     <ion-item >
-    <ion-icon name="star" item-left></ion-icon>
-      {{ (item.name)?item.name:item.m2xid}}
+    <ion-icon *ngIf="item" name="star" item-left></ion-icon>
+      {{getName(item)}}
       <!--(item.name)?item.name:item.id}}-->
       <button ion-button item-right (click)="edit(item)">edit</button>
     </ion-item>

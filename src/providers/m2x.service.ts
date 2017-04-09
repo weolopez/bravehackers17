@@ -74,7 +74,7 @@ export class M2XService {
             "X-M2X-KEY": key
         });
         let options = new RequestOptions({ headers: headers });
-        return this.http.get(this.url + '/catalog' , options)
+        return this.http.get(this.url  , options)
             .catch(this.handleError);
     }
     deleteDevice(id, key: string = this.key) {
@@ -107,7 +107,15 @@ export class M2XService {
         return this.http.get(this.url + '/' + id, options)
             .catch(this.handleError);
     }
-
+    setMetaData(data: any, id: string = this.id, key: string = this.key) {
+        let headers = new Headers({
+            'Content-Type': 'application/json; charset=utf-8',
+            "X-M2X-KEY": key
+        });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.put(this.url + '/' + id + '/metadata', data, options)
+            .catch(this.handleError);
+    }
     postData(data: any, id: string = this.id, key: string = this.key) {
 
         let headers = new Headers({
