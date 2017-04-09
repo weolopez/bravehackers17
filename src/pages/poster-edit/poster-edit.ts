@@ -13,7 +13,7 @@ export class PosterEditPage {
   public poster: FirebaseObjectObservable<any>;
   public copy;
   public id;
-  public key='d799d942e16376f6f1abb66fad955338';
+  public metadata;
   constructor(
     private af: AngularFire,
     private m2x: M2XService,
@@ -26,6 +26,8 @@ export class PosterEditPage {
     } else {
       this.id = navParams.data.id;
       this.copy = navParams.data;
+      console.log(this.id);
+      this.m2x.getMetaData(this.id).map(r=>this.metadata=r.json()).subscribe(r=>console.dir(r))
     }
   }
   edit() {
@@ -40,7 +42,7 @@ export class PosterEditPage {
     console.log(c);
     console.log(this.copy);
     if (this.poster) this.poster.set(JSON.parse(this.copy));
-    else this.m2x.setMetaData(c, this.id, this.key)
+    else this.m2x.setMetaData(c, this.id)
             .subscribe(r=>
             console.dir(r)
             );

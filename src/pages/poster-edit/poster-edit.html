@@ -22,12 +22,19 @@
 
 
 <ion-content>
+  <section *ngIf="metadata">
+    <h1>Metadata</h1>
+    <pre>
+      {{metadata | json}}
+    </pre>
+  </section>
   <pre 
        *ngIf="!editPoster"
   >
   {{copy | json}}
   </pre>
   <!--
+{"movieid":"-Kh-0hs6tqHEqRbreDIK"}
 {"movieid":"-KgzhWUQ9swHP_bogA0P"}
     -->
   <textarea id="edit-area"

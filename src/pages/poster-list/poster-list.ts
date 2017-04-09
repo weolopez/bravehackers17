@@ -20,22 +20,30 @@ export class PosterListPage {
     private m2x: M2XService
   ) {
     this.posters = af.database.list('/posters');
-    m2x.list().subscribe(data=>
-    //console.dir( data.json().devices));
-    this.m2xposters = data.json().devices);
+    this.list();
+  }
+  list() {
+    this.m2xposters=null;
+    this.m2x.list().map(data=>
+       this.m2xposters = data.json().devices)
+      .subscribe(data=>
+        console.log('completed'));
+    
+  }
+  add() {
+    this.m2x.newM2XDevice().subscribe(r=>this.list());
   }
   edit(poster) {
       this.nav.push(PosterEditPage, poster);
   }
   delete(p) {
-    console.dir(p);
-    alert('deleting: '+p.$key+' and '+p['m2eid']);
     let poster = this.af.database.list('/posters'+p.$key);
-    this.m2x.deleteDevice(p.id).subscribe(r=>console.dir(r))
+    this.m2x.deleteDevice(p.id).map(r=>console.dir(r)).subscribe(r=>setTimeout(this.list(),3000),e=>console.dir(e));
     //poster.remove();
+    
   }
   getName(item) {
-    if (item.location)  if (item.location.name) return item.location.name;
-    return item.name;
+    if (item.location)  if (item.location.name) return item.name+': '+item.location.name;
+    return item.name+': '+item.id;
   }
 }

@@ -10,8 +10,10 @@ export class M2XService {
     poster: any;
     accessToken: String;
     public url = 'https://api-m2x.att.com/v2/devices';
-    public key = 'd799d942e16376f6f1abb66fad955338';
-    public id = 'fc71ef32c6aa233cd42bffc21f88cf93';
+    //public key = 'd799d942e16376f6f1abb66fad955338';
+    public key = 'e8ff16f88dc845cb338e36bd75df72a2'
+    //public id = 'fc71ef32c6aa233cd42bffc21f88cf93';
+    public id = 'fc5f7b33e7f4788d389164e2d015269d';
     private selectedMovie: any;
     private posterid: string;
     private started=false;
@@ -56,7 +58,9 @@ export class M2XService {
             description: 'Digital Interactice Poster',
             visibility: 'public',
             tags: 'BraveHackers',
-            base_device: 'fc71ef32c6aa233cd42bffc21f88cf93',
+            metadata: {'movieid': '-Kh-0hs6tqHEqRbreDIK'},
+            base_device: '',
+            //base_device: 'fc71ef32c6aa233cd42bffc21f88cf93',
             serial: this.generateUUID()
         }
 
@@ -68,6 +72,25 @@ export class M2XService {
         return this.http.post(this.url, data, options)
             .catch(this.handleError)
     }
+    getMovieId(id: string = this.id, key: string = this.key): Observable<Response> {
+        let headers = new Headers({
+            'Content-Type': 'application/json; charset=utf-8',
+            "X-M2X-KEY": key
+        });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.get(this.url + '/' + id + '/metadata/movieid', options)
+            .catch(this.handleError);
+    }
+    putMovieId(movieid: any, id: string = this.id, key: string = this.key) {
+        let headers = new Headers({
+            'Content-Type': 'application/json; charset=utf-8',
+            "X-M2X-KEY": key
+        });
+        let data = { 'value': movieid };
+        let options = new RequestOptions({ headers: headers });
+        return this.http.put(this.url + '/' + id + '/metadata/movieid', data, options);
+    }
+
     list( key: string = this.key): Observable<Response> {
         let headers = new Headers({
             'Content-Type': 'application/json; charset=utf-8',
@@ -86,10 +109,8 @@ export class M2XService {
         return this.http.delete(this.url + '/' + id , options)
             .catch(this.handleError);
     }
-    getData(id: string = this.id, key: string = this.key) {
-        if (id === undefined) id = this.id;
-        if (key === undefined) key = this.key;
 
+    getData(id: string = this.id, key: string = this.key) {
         let headers = new Headers({
             'Content-Type': 'application/json; charset=utf-8',
             "X-M2X-KEY": key
@@ -98,6 +119,7 @@ export class M2XService {
         return this.http.get(this.url + '/' + id + '/values', options)
             .catch(this.handleError);
     }
+
     getDetails(id: string = this.id, key: string = this.key) {
         let headers = new Headers({
             'Content-Type': 'application/json; charset=utf-8',
@@ -107,6 +129,7 @@ export class M2XService {
         return this.http.get(this.url + '/' + id, options)
             .catch(this.handleError);
     }
+
     setMetaData(data: any, id: string = this.id, key: string = this.key) {
         let headers = new Headers({
             'Content-Type': 'application/json; charset=utf-8',
@@ -114,6 +137,16 @@ export class M2XService {
         });
         let options = new RequestOptions({ headers: headers });
         return this.http.put(this.url + '/' + id + '/metadata', data, options)
+            .catch(this.handleError);
+    }
+
+    getMetaData(id: string = this.id, key: string = this.key): Observable<Response> {
+        let headers = new Headers({
+            'Content-Type': 'application/json; charset=utf-8',
+            "X-M2X-KEY": key
+        });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.get(this.url + '/' + id + '/metadata', options)
             .catch(this.handleError);
     }
     postData(data: any, id: string = this.id, key: string = this.key) {
