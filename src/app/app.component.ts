@@ -12,18 +12,22 @@ import { MapPage } from '../pages/map/map';
 import { TabsPage } from '../pages/tabs/tabs';
 import { TutorialPage } from '../pages/tutorial/tutorial';
 import { SchedulePage } from '../pages/schedule/schedule';
-import { SpeakerListPage } from '../pages/speaker-list/speaker-list';
 import { SupportPage } from '../pages/support/support';
+import { HomePage } from "../pages/home/home";
 
 import { ConferenceData } from '../providers/conference-data';
 import { UserData } from '../providers/user-data';
+import { CalendarPage } from "../pages/calendar/calendar";
 import { ApiaiService } from './services/apiai.service';
+import { PosterListPage } from "../pages/poster-list/poster-list";
+import { MovieListPage } from "../pages/movie-list/movie-list";
 
 
 export interface PageInterface {
   title: string;
-  component: any;
+  component?: any;
   icon: string;
+  link?: string;
   logsOut?: boolean;
   logsIn?: boolean;
   index?: number;
@@ -43,13 +47,25 @@ export class ConferenceApp {
   // the left menu only works after login
   // the login page disables the left menu
   appPages: PageInterface[] = [
+/**
+ * 
+ * 
     { title: 'Schedule', component: TabsPage, tabComponent: SchedulePage, icon: 'calendar' },
-    { title: 'Speakers', component: TabsPage, tabComponent: SpeakerListPage, index: 1, icon: 'contacts' },
-    { title: 'Map', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
-    { title: 'About', component: TabsPage, tabComponent: AboutPage, index: 3, icon: 'information-circle' }
+    { title: 'Calendar', component: CalendarPage, icon: 'calendar' },
+    { title: 'Demo', component: HomePage, icon: 'calendar' },
+    { title: 'Theaters', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
+    { title: 'Posters', component: TabsPage, tabComponent: PosterListPage, index: 3, icon: 'film' },
+ */
+    { title: 'AT&T IoT Platform', link: 'http://m2x.att.com', index: 0, icon: 'm2x1.jpg' },
+    { title: 'api.ai intents', link: 'https://console.api.ai/api-client/#/agent/fe732d66-e9b4-4915-8331-31d5bee7266a/intents', index: 0, icon: 'apiai.png' },
+    { title: 'IBM Bluemix', link: 'https://console.ng.bluemix.net/dashboard/apps/', index: 0, icon: 'bluemix.png' },
+    { title: 'Firebase', link: 'https://console.firebase.google.com/project/bravehackers17/database/data', index: 0, icon: 'firebase.png' },
+    { title: 'About', component: AboutPage, icon: 'information-circle' }
   ];
   loggedInPages: PageInterface[] = [
     { title: 'Account', component: AccountPage, icon: 'person' },
+    { title: 'Posters', component: PosterListPage, icon: 'film' },
+    { title: 'Movies', component: MovieListPage, icon: 'videocam' },
     { title: 'Support', component: SupportPage, icon: 'help' },
     { title: 'Logout', component: TabsPage, icon: 'log-out', logsOut: true }
   ];
@@ -78,6 +94,7 @@ export class ConferenceApp {
         } else {
           this.rootPage = TutorialPage;
         }
+        this.rootPage = AboutPage ;
         this.platformReady()
       })
 
@@ -96,6 +113,10 @@ export class ConferenceApp {
     // the nav component was found using @ViewChild(Nav)
     // reset the nav to remove previous pages and only have this page
     // we wouldn't want the back button to show in this scenario
+    if (page.index===0) {
+      window.open(page.link,'_blank');
+      return;
+    }
     if (page.index) {
       this.nav.setRoot(page.component, { tabIndex: page.index }).catch(() => {
         console.log("Didn't set nav root");

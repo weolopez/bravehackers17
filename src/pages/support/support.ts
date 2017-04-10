@@ -20,7 +20,9 @@ export class SupportPage {
   ) {
 
   }
-
+  openFirebase() {
+    window.open('https://console.firebase.google.com/project/bravehackers17/database/data', '_blank');
+  }
   ionViewDidEnter() {
     let toast = this.toastCtrl.create({
       message: 'This does not actually send a support request.',

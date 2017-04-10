@@ -16,7 +16,7 @@ import {AngularFire, FirebaseObjectObservable} from 'angularfire2';
 export class ConferenceData {
   data: any;
   af: AngularFire;
-  item: any;//FirebaseObjectObservable<any>;
+  item: FirebaseObjectObservable<any>;
   constructor(public http: Http, public user: UserData, angularFire: AngularFire) {
     this.af=angularFire;
   }

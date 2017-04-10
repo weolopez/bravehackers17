@@ -1,0 +1,49 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Movie List</ion-title>
+    <ion-buttons end>
+      <button ion-button item-left (click)="edit()">Add</button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list>
+
+    <!-- Loops through and creates multiple items -->
+
+    <!-- Sliding item -->
+    <ion-item-sliding  *ngFor="let item of movies | async">
+    <ion-item >
+      <!--ion-avatar item-left>
+        <img src="img/my-avatar.png">
+      </ion-avatar>
+    <ion-icon name="star" item-left></ion-icon-->
+      {{item.title}}
+      <!--button ion-button item-left (click)="buttonClick()">Button</button> 
+      <button ion-button outline item-right (click)="buttonClick()">Outline</button>
+      <button ion-button outline item-right>View</button>
+      <ion-thumbnail item-right>
+        <img src="img/my-thumbnail.png">
+      </ion-thumbnail-->
+      <button ion-button item-right (click)="edit(item)">Edit</button>
+    </ion-item>
+      <ion-item-options>
+        <button ion-button color="primary" (click)="edit(item)">edit</button>
+      </ion-item-options>
+    </ion-item-sliding>
+
+
+    <!-- Item divider with a right button
+    <ion-item-divider>
+      Item Divider
+    </ion-item-divider>
+     -->
+
+
+  </ion-list>
+</ion-content>

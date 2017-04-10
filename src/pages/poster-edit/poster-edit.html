@@ -1,0 +1,38 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons begin>
+      <button ion-button (click)="nav.pop()">
+      <ion-icon name="back"></ion-icon>
+    </button>
+    </ion-buttons>
+    <ion-title>Edit Poster</ion-title>
+    <ion-buttons end>
+      <button ion-button item-left (click)="editPoster=!editPoster;save()">Save
+              </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <ion-list *ngIf="metadata">
+    
+  <ion-item>
+    <ion-label color="primary">Name</ion-label>
+    <ion-input placeholder="Text Input" [(ngModel)]="copy.name"></ion-input>
+  </ion-item>
+
+    <ion-item>
+      <ion-label>Movies</ion-label>
+      <ion-select [(ngModel)]="movie">
+        <ion-option *ngFor="let m of movies | async" [value]="m.$key" [selected]="m.$key===metadata.movieid">{{m.title}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+  <!--
+{"movieid":"-Kh-0hs6tqHEqRbreDIK"}
+{"movieid":"-KgzhWUQ9swHP_bogA0P"}
+    -->
+  <textarea id="edit-area" *ngIf="editPoster" #text (change)="copy = text.value" [value]='copy | json'>
+  </textarea>
+</ion-content>

@@ -7,6 +7,7 @@ import { SignupPage } from '../signup/signup';
 import { TabsPage } from '../tabs/tabs';
 import { UserData } from '../../providers/user-data';
 import { AngularFire } from 'angularfire2';
+import { AboutPage } from "../about/about";
 
 
 @Component({
@@ -31,7 +32,7 @@ export class LoginPage {
   private onSignInSuccess(): void {
     console.log("Facebook display name ", this.userData.displayName());
     this.userData.login(this.userData.displayName());
-    this.navCtrl.push(TabsPage);
+    this.navCtrl.push(AboutPage);
   }
 
   onSignup() {

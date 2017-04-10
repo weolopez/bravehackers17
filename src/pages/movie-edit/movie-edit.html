@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons begin>
+    <button ion-button (click)="nav.pop()">
+      <ion-icon name="back"></ion-icon>
+    </button>
+    </ion-buttons>
+    <ion-title>Edit Movie</ion-title>
+    <ion-buttons end>
+      <button ion-button 
+              *ngIf="!editMovie"
+              item-left 
+              (click)="editMovie=!editMovie">Edit</button>
+      <button ion-button 
+              *ngIf="editMovie"
+              item-left 
+              (click)="editMovie=!editMovie;save()">Save
+              </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+  <pre 
+       *ngIf="!editMovie"
+  >
+  {{movie | async | json}}
+  </pre>
+  <textarea id="edit-area"
+            *ngIf="editMovie"
+            #text 
+            (change)="copy = text.value" 
+            [value]='copy | json'
+            >
+  </textarea>
+</ion-content>
