@@ -25,14 +25,13 @@ export class PosterEditPage {
     console.dir(navParams.data);
       this.id = navParams.data.id;
       this.copy = navParams.data;
-      console.log(this.id);
-      this.m2x.getMetaData(this.id).map(r=>this.metadata=r.json()).subscribe(r=>console.dir(r))
+      this.m2x.getMetaData(this.id).map(r=>this.metadata=r.json()).subscribe(r=>this.movie=r.movieid)
       this.movies = af.database.list('/movies');
   }
   edit() {
+    this.movie
       if (!this.copy['metadata']) this.copy = 'empty';
       else this.copy = this.copy['metadata'] ;
-    console.dir(this.copy);
   }
   save() {
     let c={
