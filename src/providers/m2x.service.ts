@@ -169,6 +169,16 @@ export class M2XService {
             .catch(this.handleError);
     }
 
+    setDetails(data: any, id: string = this.id, key: string = this.key) {
+        let headers = new Headers({
+            'Content-Type': 'application/json; charset=utf-8',
+            "X-M2X-KEY": key
+        });
+        let options = new RequestOptions({ headers: headers });
+        return this.http.put(this.url + '/' + id , data, options)
+            .catch(this.handleError);
+    }
+
     handleError(error: any) {
         console.error(error);
         return Observable.defer(error.json().error || 'M2E Server error');
