@@ -15,27 +15,34 @@ export class M2XService {
     //public id = 'fc71ef32c6aa233cd42bffc21f88cf93';
     public id = 'fc5f7b33e7f4788d389164e2d015269d';
     private selectedMovie: any;
-    private posterid: string;
     private started=false;
     private m2edata: any;
     constructor(private http: Http, private af: AngularFire) {
-        this.posterid = this.getPosterId();
-        af.database.object('/posters/' + this.posterid).subscribe(
-            data => this.poster = data
-        )
     }
 
     getPosterId() {
-        this.posterid = localStorage.getItem('posterid');
-        if (!this.posterid) {
+        if (!localStorage.getItem('posterid')) {
             if (this.started) return;
             this.started=true; 
-            this.newM2XDevice().subscribe(
-                data=>this.newFirebaseDevice(data.json())
+            this.newM2XDevice().map(r=>
+                this.id = r.json()['id']
+            ).map(id=> localStorage.setItem('posterid',id)
+            ).subscribe(r=>{
+                    location.reload();
+                    console.dir(r);
+                },
+                e => {
+                    localStorage.setItem('posterid','fc5f7b33e7f4788d389164e2d015269d');
+                    location.reload();
+                }
             )
-        }
-        return this.posterid;
+        } else this.id = localStorage.getItem('posterid');
+        console.log('constructorID::'+this.id);
     }
+    /**
+     * Do we need a firebase poster?
+     * No just need firebase movie
+     * @param data 
     newFirebaseDevice(data) {
         
             let defaultPoster = {};
@@ -50,18 +57,18 @@ export class M2XService {
             this.af.database.object('/posters/' + this.posterid).set(defaultPoster).then(e=>console.dir(e));
             localStorage.setItem('posterid', this.posterid);
     }
+     */
     newM2XDevice(key: string = this.key): Observable<any>  {
         if (key === undefined) key = this.key;
-
+        let id = this.generateUUID();
         let data = {
-            name: this.posterid,
+            name: 'Movie Poster',
             description: 'Digital Interactice Poster',
             visibility: 'public',
             tags: 'BraveHackers',
             metadata: {'movieid': '-Kh-0hs6tqHEqRbreDIK'},
-            base_device: '',
-            //base_device: 'fc71ef32c6aa233cd42bffc21f88cf93',
-            serial: this.generateUUID()
+            base_device: this.id,
+            serial: id
         }
 
         let headers = new Headers({
@@ -141,22 +148,14 @@ export class M2XService {
     }
 
     getMetaData(id: string = this.id, key: string = this.key): Observable<Response> {
+        
+        console.log('ID::'+id);
         let headers = new Headers({
             'Content-Type': 'application/json; charset=utf-8',
             "X-M2X-KEY": key
         });
         let options = new RequestOptions({ headers: headers });
         return this.http.get(this.url + '/' + id + '/metadata', options)
-            .catch(this.handleError);
-    }
-
-    setDetails(data: any, id: string = this.id, key: string = this.key) {
-        let headers = new Headers({
-            'Content-Type': 'application/json; charset=utf-8',
-            "X-M2X-KEY": key
-        });
-        let options = new RequestOptions({ headers: headers });
-        return this.http.put(this.url + '/' + id , data, options)
             .catch(this.handleError);
     }
     postData(data: any, id: string = this.id, key: string = this.key) {
