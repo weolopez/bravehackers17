@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { ActionSheet, ActionSheetController, Config, NavController, NavParams } from 'ionic-angular';
 import { PosterService } from "../../providers/poster.service";
 import { M2XService } from "../../providers/m2x.service";
+import { PosterListPage } from "../poster-list/poster-list";
 
 @Component({
   selector: 'page-poster-edit',
@@ -17,6 +18,7 @@ export class PosterEditPage {
   public movie;
   constructor(
     private af: AngularFire,
+    public nav: NavController,
     private m2x: M2XService,
     private navParams: NavParams
   ) {
@@ -43,8 +45,9 @@ export class PosterEditPage {
         }
     }
     this.m2x.setDetails(c, this.id)
-            .subscribe(r=>
-            console.dir(r)
-            );
+            .subscribe(r=> {
+                console.dir(r);
+                this.nav.push(PosterListPage);
+            });
   }
 }

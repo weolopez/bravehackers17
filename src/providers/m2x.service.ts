@@ -39,25 +39,6 @@ export class M2XService {
         } else this.id = localStorage.getItem('posterid');
         console.log('constructorID::'+this.id);
     }
-    /**
-     * Do we need a firebase poster?
-     * No just need firebase movie
-     * @param data 
-    newFirebaseDevice(data) {
-        
-            let defaultPoster = {};
-            this.posterid = this.generateUUID();
-
-            defaultPoster = this.getDefaultData();
-            defaultPoster['posterid'] = this.posterid;
-            defaultPoster['m2eid'] = data.id;
-            defaultPoster['m2ekey'] = this.key;
-
-        console.dir(defaultPoster);
-            this.af.database.object('/posters/' + this.posterid).set(defaultPoster).then(e=>console.dir(e));
-            localStorage.setItem('posterid', this.posterid);
-    }
-     */
     newM2XDevice(key: string = this.key): Observable<any>  {
         if (key === undefined) key = this.key;
         let id = this.generateUUID();
