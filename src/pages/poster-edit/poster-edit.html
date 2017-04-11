@@ -29,10 +29,14 @@
       </ion-select>
     </ion-item>
   </ion-list>
-  <!--
-{"movieid":"-Kh-0hs6tqHEqRbreDIK"}
-{"movieid":"-KgzhWUQ9swHP_bogA0P"}
-    -->
-  <textarea id="edit-area" *ngIf="editPoster" #text (change)="copy = text.value" [value]='copy | json'>
-  </textarea>
+
+<h1>Device Details</h1>
+  <pre>
+    {{copy | json}}
+  </pre>
+
+<h1>Metadata Details</h1>
+  <pre>
+    {{metadata | json}}
+  </pre>
 </ion-content>
