@@ -47,7 +47,7 @@ export class PosterEditPage {
     this.m2x.setDetails(c, this.id)
             .subscribe(r=> {
                 console.dir(r);
-                this.nav.push(PosterListPage);
+                this.nav.setRoot(PosterListPage);
             });
   }
 }
