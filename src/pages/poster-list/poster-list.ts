@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { ActionSheet, ActionSheetController, Config, NavController } from 'ionic-angular';
 import { PosterEditPage } from "../poster-edit/poster-edit";
 import { M2XService } from "../../providers/m2x.service";
+import { PosterViewPage } from "../poster-view/poster-view";
 
 @Component({
   selector: 'page-poster-list',
@@ -35,6 +36,9 @@ export class PosterListPage {
   }
   edit(poster) {
       this.nav.push(PosterEditPage, poster);
+  }
+  view(poster) {
+      this.nav.push(PosterViewPage, poster);
   }
   delete(p) {
     let poster = this.af.database.list('/posters'+p.$key);

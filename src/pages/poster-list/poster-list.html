@@ -3,7 +3,7 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Poster List</ion-title>
+    <ion-title>Poster List ( {{(m2xposters) ? m2xposters.length : 0}} of 10)</ion-title>
     <ion-buttons end>
       <button ion-button item-left (click)="add()">Add</button>
     </ion-buttons>
@@ -11,15 +11,15 @@
 </ion-header>
 
 <ion-content>
-
   <ion-list>
 
     <!-- Sliding item -->
-    <ion-item-sliding   *ngFor="let item of m2xposters">
+    <ion-item-sliding *ngFor="let item of m2xposters">
     <ion-item >
     <ion-icon *ngIf="item" name="star" item-left></ion-icon>
       {{getName(item)}}
       <!--(item.name)?item.name:item.id}}-->
+      <button ion-button item-right (click)="view(item)">view</button>
       <button ion-button item-right (click)="edit(item)">edit</button>
     </ion-item>
       <ion-item-options>

@@ -1,0 +1,37 @@
+<ion-header>
+  <ion-navbar>
+    <ion-buttons begin>
+      <button ion-button (click)="nav.pop()">
+      <ion-icon name="back"></ion-icon>
+    </button>
+    </ion-buttons>
+    <ion-title>View Poster</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <ion-list *ngIf="metadata">
+    
+  <ion-item>
+    <ion-label color="primary">Name</ion-label>
+    <ion-input placeholder="Text Input" [(ngModel)]="copy.name"></ion-input>
+  </ion-item>
+
+    <ion-item>
+      <ion-label>Movies</ion-label>
+      <ion-select [(ngModel)]="movie">
+        <ion-option *ngFor="let m of movies | async" [value]="m.$key" [selected]="m.$key===metadata.movieid">{{m.title}}</ion-option>
+      </ion-select>
+    </ion-item>
+  </ion-list>
+
+<h1>Device Details</h1>
+  <pre>
+    {{copy | json}}
+  </pre>
+
+<h1>Metadata Details</h1>
+  <pre>
+    {{metadata | json}}
+  </pre>
+</ion-content>

@@ -13,60 +13,96 @@
 </ion-header>
 
 <ion-content>
-  <div class="about-header">
+  <div class="about-header" (swipe)="swipe($event)">
     <img id="logo" src="assets/img/logo.svg" style="width: 120px;float: left;height: 130px" alt="ionic logo">
-    <h1 style="margin-top: 50px;float: left;color: white; font-weight: bolder"> Digital Poster </h1>
+    <h1 style="font-size: 3.6vw; margin-top: 50px;float: left;color: white; font-weight: bolder"> Digital Interactive Poster </h1>
   </div>
 
   <section>
-      <article id=slides>
-        <ion-slides slidesPerView="1" autoplay="1000" loop="true">
-          <ion-slide *ngFor="let p of posters">
-            <img class="guy" [src]="'assets/img/'+p">
-          </ion-slide>
-        </ion-slides>
-      </article>
-      <article id="about">
-        <h1>About</h1>
-        <p>
-          Digital interactive posters can replace posters currently deployed in any location for example movie theaters, malls and public transit. 
-          The device contains sensors to detect audio, facial and hand gestures. The management
-          App can push content to multiple Movie Posters remotely from a centralized location. Movie Poster
-          and Management Application concept can be extended to other industries like restaurants, sports stadiums,
-          theme parks. 
-        </p>
+    <vg-player>
+      <vg-overlay-play></vg-overlay-play>
+      <vg-buffering></vg-buffering>
 
-        <h1>User Experience</h1>
+      <vg-scrub-bar>
+        <vg-scrub-bar-current-time></vg-scrub-bar-current-time>
+        <vg-scrub-bar-buffering-time></vg-scrub-bar-buffering-time>
+      </vg-scrub-bar>
+
+      <vg-controls>
+        <vg-play-pause></vg-play-pause>
+        <vg-playback-button></vg-playback-button>
+
+        <vg-time-display vgProperty="current" vgFormat="mm:ss"></vg-time-display>
+
+        <vg-scrub-bar style="pointer-events: none;"></vg-scrub-bar>
+
+        <vg-time-display vgProperty="left" vgFormat="mm:ss"></vg-time-display>
+        <vg-time-display vgProperty="total" vgFormat="mm:ss"></vg-time-display>
+
+        <vg-track-selector></vg-track-selector>
+        <vg-mute></vg-mute>
+        <vg-volume></vg-volume>
+
+        <vg-fullscreen></vg-fullscreen>
+      </vg-controls>
+
+      <video [vgMedia]="media" #media id="singleVideo" preload="auto" crossorigin>
+        <source src="assets/video/poster.mp4" type="video/mp4">
+      </video>
+    </vg-player>
+
+
+    <article id=slides>
+      <ion-slides slidesPerView="1" autoplay="1000" loop="true">
+        <ion-slide *ngFor="let p of posters">
+          <img class="guy" [src]="'assets/img/'+p">
+        </ion-slide>
+      </ion-slides>
+    </article>
+    <article id="about">
+      <h1>About</h1>
+      <p>
+        Digital interactive posters can replace posters currently deployed in any location for example movie theaters, malls and
+        public transit. The device contains sensors to detect audio, facial and hand gestures. The management App can push
+        content to multiple Movie Posters remotely from a centralized location. Movie Poster and Management Application concept
+        can be extended to other industries like restaurants, sports stadiums, theme parks.
+      </p>
+
+      <h1>User Experience</h1>
+      <ul>
+        <li>As a potential user walks by the poster, the device can detect the user's movement and present a screen instructing
+          them on how to activate the device</li>
+        <li>Putting thier hand on the marked motion sensor activates the menu, camera and microphone.</li>
+        <li>The user can either ask in a natural language what they want to do or wave their hand back and forth to change menu
+          options</li>
+        <li>Swiping up on the sensor or via intent analysis of voice recognition a menu item is activated to show additional
+          features</li>
+        <li>Menu items include viewing a trailer, ratings, cast and other movie information, show times and ticket purchasing</li>
+        <li>Payment is made by face recognition. When entering the menu a picture is taken and image analysis is performed</li>
+        <li>Once the time and number of tickets are selected, a short numeric code is provded to the user. She will then give
+          the movie theater usher the code.</li>
+        <li>The usher enters in the short code and the user's picture is presented so he can verify her identity</li>
+      </ul>
+      <h1>Digital Interactive Poster</h1>
+      <ul>
+        <li>The device contains several pieces of equipment</li>
         <ul>
-          <li>As a potential user walks by the poster, the device can detect the user's movement and present a screen instructing them on how to activate the device</li>
-          <li>Putting thier hand on the marked motion sensor activates the menu, camera and microphone.</li>
-          <li>The user can either ask in a natural language what they want to do or wave their hand back and forth to change menu options</li>
-          <li>Swiping up on the sensor or via intent analysis of voice recognition a menu item is activated to show additional features</li>
-          <li>Menu items include viewing a trailer, ratings, cast and other movie information, show times and ticket purchasing</li>
-          <li>Payment is made by face recognition.  When entering the menu a picture is taken and image analysis is performed</li>
-          <li>Once the time and number of tickets are selected, a short numeric code is provded to the user. She will then give the movie theater usher the code.</li>
-          <li>The usher enters in the short code and the user's picture is presented so he can verify her identity</li>
+          <li>High Definition TV</li>
+          <li>Raspberry Pi</li>
+          <li>AT&amp;T IoT LTE Module</li>
+          <li>Motion Sensor</li>
+          <li>Webcam</li>
         </ul>
-        <h1>Digital Interactive Poster</h1>
-        <ul>
-          <li>The device contains several pieces of equipment</li>
-          <ul>
-            <li>High Definition TV</li>
-            <li>Raspberry Pi</li>
-            <li>AT&amp;T IoT LTE Module</li>
-            <li>Motion Sensor</li>
-            <li>Webcam</li>
-          </ul>
-          <li>The device is physically installed in any location.</li>
-          <li>Once plugged in the device registers with a REST POST to AT&amp;T M2X device API</li>
-          <li>It is now visible in the Management app and can be assigned a movie.</li>
-          <li>The poster hosts a webserver that a local browser will call to present the Poster Application</li>
-          <li>The applicatioon is distributed using GIT and presented with the Chromium web browser</li>
-          <li>Motion gestures are captured and convereted to keyboard keys that are interpreted by the browser</li>
-          <li>Voice capture and speech to text leverages HTML5 APIs. Text to intent analysis is done via api.ai REST services</li>
-          <li>Bluemix Visual Recognition is used for image analysis and face recognition</li>
-        </ul>        
-      </article>
+        <li>The device is physically installed in any location.</li>
+        <li>Once plugged in the device registers with a REST POST to AT&amp;T M2X device API</li>
+        <li>It is now visible in the Management app and can be assigned a movie.</li>
+        <li>The poster hosts a webserver that a local browser will call to present the Poster Application</li>
+        <li>The applicatioon is distributed using GIT and presented with the Chromium web browser</li>
+        <li>Motion gestures are captured and convereted to keyboard keys that are interpreted by the browser</li>
+        <li>Voice capture and speech to text leverages HTML5 APIs. Text to intent analysis is done via api.ai REST services</li>
+        <li>Bluemix Visual Recognition is used for image analysis and face recognition</li>
+      </ul>
+    </article>
   </section>
 
 </ion-content>
