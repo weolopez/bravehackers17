@@ -38627,6 +38627,30 @@ ion-navbar.toolbar {
   margin-left: -9px;
 }
 
+#menu {
+  position: absolute;
+  top: 50%;
+  width: 100%;
+  height: 55px;
+  background: pink;
+  z-index: 9;
+}
+
+page-home .poster-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: black;
+  border: 3px solid #009fdb;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-size: 3.0em;
+  padding: 0.3em;
+  font-style: italic;
+}
+
 .about-header {
   background-color: #434954;
   padding: 16px;
@@ -38868,6 +38892,187 @@ ion-app._gmaps_cdv_ .nav-decor {
   background-color: transparent !important;
 }
 
+.menu-page {
+  background: transparent;
+}
+
+.menu-page .menu-item {
+  border-radius: 10px;
+}
+
+.menu-page .swiper-slide-next .menu-item {
+  border: 3px solid #009fdb;
+}
+
+.menu-page .slide-zoom {
+  height: 110px;
+  background-color: rgba(255, 255, 255, 0.3);
+  overflow: auto;
+}
+
+.menu-page .slide-zoom .menu-item {
+  position: relative;
+  height: 100px;
+  width: 80%;
+  min-width: 90px;
+  max-width: 120px;
+  white-space: normal;
+  background-color: rgba(0, 0, 0, 0.8);
+  background-repeat: no-repeat;
+  background-position-x: center;
+  background-position-y: 8px;
+  background-size: 65px;
+}
+
+.menu-page .slide-zoom .menu-item span {
+  color: #009fdb;
+  position: absolute;
+  bottom: 5px;
+  left: 0;
+  right: 0;
+  font-size: 0.5em;
+  height: initial;
+}
+
+.menu-page .scroll-content {
+  overflow-y: hidden;
+}
+
+.menu-page .slides-wrapper {
+  height: 100%;
+}
+
+.menu-page .listening-container {
+  position: absolute;
+  width: 100%;
+  height: 6em;
+  top: 6em;
+  right: 2em;
+  text-align: right;
+}
+
+.menu-page .listening-container .listening-icon {
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  width: 6em;
+  height: 6em;
+  background-image: url(../assets/images/svg/hearingIco.svg);
+  float: right;
+  clear: both;
+}
+
+.menu-page .listening-container .listening-text {
+  text-align: right;
+  font-size: 2em;
+  color: white;
+  clear: both;
+  float: right;
+  width: 15em;
+}
+
+@-webkit-keyframes pulse_animation {
+  0% {
+    -webkit-transform: scale(0.91);
+    transform: scale(0.91);
+    opacity: 0.7;
+  }
+  20% {
+    -webkit-transform: scale(0.93);
+    transform: scale(0.93);
+    opacity: 0.8;
+  }
+  40% {
+    -webkit-transform: scale(0.97);
+    transform: scale(0.97);
+    opacity: 0.9;
+  }
+  50% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1.0;
+  }
+  60% {
+    -webkit-transform: scale(0.97);
+    transform: scale(0.97);
+    opacity: 0.9;
+  }
+  80% {
+    -webkit-transform: scale(0.93);
+    transform: scale(0.93);
+    opacity: 0.8;
+  }
+  100% {
+    -webkit-transform: scale(0.91);
+    transform: scale(0.91);
+    opacity: 0.7;
+  }
+}
+
+@keyframes pulse_animation {
+  0% {
+    -webkit-transform: scale(0.91);
+    transform: scale(0.91);
+    opacity: 0.7;
+  }
+  20% {
+    -webkit-transform: scale(0.93);
+    transform: scale(0.93);
+    opacity: 0.8;
+  }
+  40% {
+    -webkit-transform: scale(0.97);
+    transform: scale(0.97);
+    opacity: 0.9;
+  }
+  50% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1.0;
+  }
+  60% {
+    -webkit-transform: scale(0.97);
+    transform: scale(0.97);
+    opacity: 0.9;
+  }
+  80% {
+    -webkit-transform: scale(0.93);
+    transform: scale(0.93);
+    opacity: 0.8;
+  }
+  100% {
+    -webkit-transform: scale(0.91);
+    transform: scale(0.91);
+    opacity: 0.7;
+  }
+}
+
+.menu-page .pulse {
+  -webkit-animation-name: pulse_animation;
+  animation-name: pulse_animation;
+  -webkit-animation-duration: 1200ms;
+  animation-duration: 1200ms;
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+  -webkit-animation-timing-function: linear;
+  animation-timing-function: linear;
+}
+
+.modal-wrapper.full-screen {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+@media only screen and (min-height: 600px) and (min-width: 768px) {
+  .md .modal-wrapper {
+    box-shadow: none;
+  }
+}
+
 #edit-area {
   width: 100%;
   height: 720px;
@@ -38904,6 +39109,35 @@ page-speaker-list .speaker-card ion-card-content {
 
 page-mrtdata ion-label {
   margin: 0px 8px 13px 0;
+}
+
+page-speaker-list .scroll-content {
+  background: #EDEDED;
+}
+
+page-speaker-list .speaker-card {
+  height: 100%;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-flex-direction: column;
+  -ms-flex-direction: column;
+  flex-direction: column;
+}
+
+page-speaker-list .speaker-card ion-card-content {
+  -webkit-flex: 1 1 auto;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+}
+
+page-speaker-list .speaker-card ion-card-header .item {
+  padding: 4px 16px;
+}
+
+page-speaker-list .speaker-card ion-card-content {
+  padding-left: 0;
+  padding-right: 0;
 }
 
 page-speaker-list .scroll-content {
