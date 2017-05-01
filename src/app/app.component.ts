@@ -21,6 +21,7 @@ import { CalendarPage } from "../pages/calendar/calendar";
 import { ApiaiService } from './services/apiai.service';
 import { PosterListPage } from "../pages/poster-list/poster-list";
 import { MovieListPage } from "../pages/movie-list/movie-list";
+import { Http } from "@angular/http";
 
 
 export interface PageInterface {
@@ -38,7 +39,11 @@ export interface PageInterface {
   templateUrl: 'app.template.html',
   providers: [ApiaiService]
 })
-export class ConferenceApp {
+export class DigitalInteractivePosterManagementApp {
+  isMenuActive: any;
+  lastMessage: any;
+
+  private unregisterKeyboardListener;
   // the root nav is a child of the root app component
   // @ViewChild(Nav) gets a reference to the app's root nav
   @ViewChild(Nav) nav: Nav;
@@ -47,15 +52,15 @@ export class ConferenceApp {
   // the left menu only works after login
   // the login page disables the left menu
   appPages: PageInterface[] = [
-/**
- * 
- * 
-    { title: 'Schedule', component: TabsPage, tabComponent: SchedulePage, icon: 'calendar' },
-    { title: 'Calendar', component: CalendarPage, icon: 'calendar' },
-    { title: 'Demo', component: HomePage, icon: 'calendar' },
-    { title: 'Theaters', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
-    { title: 'Posters', component: TabsPage, tabComponent: PosterListPage, index: 3, icon: 'film' },
- */
+    /**
+     * 
+     * 
+        { title: 'Schedule', component: TabsPage, tabComponent: SchedulePage, icon: 'calendar' },
+        { title: 'Calendar', component: CalendarPage, icon: 'calendar' },
+        { title: 'Demo', component: HomePage, icon: 'calendar' },
+        { title: 'Theaters', component: TabsPage, tabComponent: MapPage, index: 2, icon: 'map' },
+        { title: 'Posters', component: TabsPage, tabComponent: PosterListPage, index: 3, icon: 'film' },
+     */
     { title: 'AT&T IoT Platform', link: 'http://m2x.att.com', index: 0, icon: 'm2x1.jpg' },
     { title: 'api.ai intents', link: 'https://console.api.ai/api-client/#/agent/fe732d66-e9b4-4915-8331-31d5bee7266a/intents', index: 0, icon: 'apiai.png' },
     { title: 'IBM Bluemix', link: 'https://console.ng.bluemix.net/dashboard/apps/', index: 0, icon: 'bluemix.png' },
@@ -83,8 +88,11 @@ export class ConferenceApp {
     public platform: Platform,
     public confData: ConferenceData,
     public storage: Storage,
-    public splashScreen: SplashScreen
+    public splashScreen: SplashScreen,
+    private http: Http,
+    //private wsService: WebSocketService
   ) {
+
 
     // Check if the user has already seen the tutorial
     this.storage.get('hasSeenTutorial')
@@ -94,7 +102,7 @@ export class ConferenceApp {
         } else {
           this.rootPage = TutorialPage;
         }
-        this.rootPage = AboutPage ;
+        this.rootPage = AboutPage;
         this.platformReady()
       })
 
@@ -113,8 +121,8 @@ export class ConferenceApp {
     // the nav component was found using @ViewChild(Nav)
     // reset the nav to remove previous pages and only have this page
     // we wouldn't want the back button to show in this scenario
-    if (page.index===0) {
-      window.open(page.link,'_blank');
+    if (page.index === 0) {
+      window.open(page.link, '_blank');
       return;
     }
     if (page.index) {
@@ -158,9 +166,21 @@ export class ConferenceApp {
   }
 
   platformReady() {
+    let self = this;
     // Call any initial plugins when ready
     this.platform.ready().then(() => {
+      
+      this.events.subscribe('menu:up', () => this.up(this));
+      this.events.subscribe('menu:down', () => this.down(this));
+      //this.events.subscribe('menu:left', () => this.left(this));
+      //this.events.subscribe('menu:right', () => this.right(this));
+      this.events.subscribe('menu:escape', () => this.escape(this));
+      //this.events.subscribe('menu:space', () => this.space(this));
+
       this.splashScreen.hide();
+      this.unregisterKeyboardListener = this.platform.registerListener(this.platform.doc(), 'keydown', (event) => this.handleKeyboardEvents(event), {});
+
+     // setTimeout(this.getData(), 1000);
     });
   }
 
@@ -180,4 +200,130 @@ export class ConferenceApp {
     }
     return;
   }
+
+
+
+  private serverURL = 'http://zltv2050.vci.att.com:8080/api/clients/bravehackers/3203/10/5650';
+  getData() {
+    /**
+     * websocket implementation
+    this.messages.subscribe(msg => {
+     */
+    this.http.get(this.serverURL)
+      .map(resp => {
+        let data = resp.json().content;
+        return {
+          id: data.id,
+          value: data.value,
+          message: 'UP'
+        }
+      })
+      .subscribe(msg => {
+
+        let mod = msg.value % 1;
+        if (mod != this.lastMessage) {
+          console.log("New Message: " + mod);
+          this.lastMessage = mod;
+        }
+        else {
+          console.log("Mod: " + mod);
+          console.log("lastmessage: " + this.lastMessage);
+          setTimeout(this.getData(), 1000);
+          return;
+        }
+
+        console.log('Direction: ' + msg.message);
+
+        if (msg.message === 'escape') this.events.publish('menu:escape');
+        if (msg.message === 'space') this.events.publish('menu:space');
+
+        if (Math.floor(msg.value) == 1) this.events.publish('menu:left');
+        if (Math.floor(msg.value) == 2) this.events.publish('menu:right');
+        if (Math.floor(msg.value) == 3) this.events.publish('menu:up');
+        if (Math.floor(msg.value) == 4) this.events.publish('menu:down');
+
+        setTimeout(this.getData(), 1000);
+      })
+  }
+
+  up(o) {
+    let app = o;
+    if (!app.isMenuActive) {
+      app.isMenuActive = true;
+      app.events.publish('menu:activate');
+    }
+    else {
+      app.isMenuActive = false;
+      app.events.publish('menu:select');
+    }
+  }
+  down(o) {
+    let app = o;
+    app.isMenuActive = false;
+    app.events.publish('menu:escape');
+    app.events.publish('menu:dismiss');
+  }
+  right(o) {
+    let app = o;
+   // app.events.publish('menu:right');
+  }
+  left(o) {
+    let app = o;
+   // app.events.publish('menu:left');
+  }
+  escape(o) {
+    let app = o;
+    app.isMenuActive = false;
+  //  app.events.publish('menu:escape');
+  }
+  space(o) {
+    let app = o;
+    app.isMenuActive = false;
+  //  app.events.publish('menu:help');
+  }
+  ionViewDidEnter() {
+  }
+
+  ionViewDidLeave() {
+  }
+
+  handleKeyboardEvents(event) {
+    switch (event.key) {
+      case "ArrowUp":
+        this.events.publish('menu:up');
+        break;
+
+      case "ArrowDown":
+        this.events.publish('menu:down');
+        break;
+
+      case "Escape":
+        this.events.publish('menu:escape');
+        break;
+
+      case " ":
+        this.events.publish('menu:space');
+        break;
+
+        //this.events.publish('menu:left');
+        //this.events.publish('menu:right');
+      default:
+        break;
+    }
+  }
+
+  startListeningToKeyboard() {
+    this.stopListeningToKeyboard();
+    this.unregisterKeyboardListener = this.platform.registerListener(this.platform.doc(), 'keydown', (event) => this.handleKeyboardEvents(event), {});
+    //this.slides.enableKeyboardControl(true);
+  }
+
+  stopListeningToKeyboard() {
+    if (this.unregisterKeyboardListener) {
+      this.unregisterKeyboardListener();
+    }
+    //this.slides.enableKeyboardControl(false);
+  }
+
+
 }

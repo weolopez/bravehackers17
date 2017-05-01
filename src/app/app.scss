@@ -19,4 +19,13 @@
     margin-left: -9px;
 }
 
-@import '../assets/css/videogular.css'
+@import '../assets/css/videogular.css';
+
+#menu {
+    position: absolute;
+    top: 50%;
+    width: 100%;
+    height: 55px;
+    background: pink;
+    z-index: 9;
+}

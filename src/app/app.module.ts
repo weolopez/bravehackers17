@@ -3,7 +3,7 @@ import { NgModule, LOCALE_ID } from '@angular/core';
 import { IonicApp, IonicModule } from 'ionic-angular';
 import { IonicStorageModule } from '@ionic/storage';
 
-import { ConferenceApp } from './app.component';
+import { DigitalInteractivePosterManagementApp } from './app.component';
 
 import { AboutPage } from '../pages/about/about';
 import { CalendarPage } from '../pages/calendar/calendar';
@@ -41,6 +41,7 @@ import { MovieListPage } from "../pages/movie-list/movie-list";
 import { MovieEditPage } from "../pages/movie-edit/movie-edit";
 import { M2XService } from "../providers/m2x.service";
 
+import {MenuComponent} from '../components/menu/menu';
 
 import {BrowserModule} from '@angular/platform-browser';
 
@@ -51,6 +52,7 @@ import {VgOverlayPlayModule} from 'videogular2/overlay-play';
 import {VgBufferingModule} from 'videogular2/buffering';
 
 import { SinglePlayerModule } from "../components/single-player/single-player.module";
+import { MenuPage } from "../pages/menu/menu";
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDQ1wWxzlqkGMuB6bL4bQmeyVH7-OfDgzM",
@@ -62,7 +64,7 @@ export const firebaseConfig = {
 
 @NgModule({
   declarations: [
-    ConferenceApp,
+    DigitalInteractivePosterManagementApp,
     CalendarPage,
     AboutPage,
     AccountPage,
@@ -75,6 +77,7 @@ export const firebaseConfig = {
     SignupPage,
     SpeakerDetailPage,
     TabsPage,
+    MenuPage,
     TutorialPage,
     MrtdataPage,
     ChatBubble,
@@ -84,7 +87,8 @@ export const firebaseConfig = {
     PosterListPage,
     PosterViewPage,
     PosterEditPage,
-    HomePage
+    HomePage,
+    MenuComponent
   ],
   imports: [      
         VgCoreModule,
@@ -95,18 +99,19 @@ export const firebaseConfig = {
         
         BrowserModule,
     NgCalendarModule,
-    IonicModule.forRoot(ConferenceApp),
+    IonicModule.forRoot(DigitalInteractivePosterManagementApp),
 		IonicStorageModule.forRoot(),
     JsonpModule,
     AngularFireModule.initializeApp(firebaseConfig)
   ],
   bootstrap: [IonicApp],
   entryComponents: [
-    ConferenceApp,
+    DigitalInteractivePosterManagementApp,
     AboutPage,
     CalendarPage,
     AccountPage,
     LoginPage,
+    MenuPage,
     MapPage,
     PopoverPage,
     SchedulePage,
