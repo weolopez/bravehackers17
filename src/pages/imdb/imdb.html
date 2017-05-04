@@ -1,0 +1,36 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-title><span class="mp-title-icon" style="background-image: url(assets/images/svg/aboutIco.white.svg)"></span>About</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="movie-header">{{selectedMovie.title}}, {{selectedMovie.year}}</div>
+
+    <hr>
+
+    <div class="movie-synopsis">
+        <h5>Synopsis</h5>
+        <div class="movie-synopsis-text">{{selectedMovie.synopsis}}</div>
+    </div>
+
+    <hr>
+
+    <div class="movie-cast">
+        <h5>Cast</h5>
+        <ion-slides #slides slidesPerView="5" loop pager>
+            <ion-slide *ngFor="let actor of selectedMovie.cast; let i=index">
+                <div class="menu-item">
+                    <div class="cast-member">
+                        <div class="avatar" [attr.data-menu-item]="i" [style.backgroundImage]="'url(' + actor.avatarUrl + ')'"></div>
+                        <div class="cast-member-description">
+                            <div class="cast-member-name">{{actor.name}}</div>
+                            <div class="cast-member-character">{{actor.character}}</div>
+                        </div>
+                    </div>
+                </div>
+            </ion-slide>
+        </ion-slides>
+    </div>
+
+</ion-content>

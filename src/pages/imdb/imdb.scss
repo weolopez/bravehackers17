@@ -1,0 +1,63 @@
+page-imdb {
+    h5 {
+        font-size: 1.1em;
+    }
+    hr {
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+    .movie-header {
+        font-size: 1.5em;
+    }
+    .slide-zoom {
+        height: 200px;
+        background-color: rgba(255, 255, 255, 0.3);
+        overflow: auto;
+        margin: auto;
+        overflow: hidden;
+        .cast-member {
+            text-align: left;
+            border: 1px solid silver;
+            width: 90px;
+            height: 100%;
+            .cast-member-name {
+                padding: 2px 5px 2px 5px;
+                font-weight: bold;
+                font-size: 0.6em;
+            }
+            .cast-member-character {
+                padding: 2px 5px 2px 5px;
+                font-size: 0.6em;
+            }
+        }
+        .avatar {
+            height: 100px;
+            background-color: rgba(0, 0, 0, 0.8);
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: cover;
+        }
+        .menu-item {
+            position: relative;
+            margin: auto;
+            height: 155px;
+            width: 90px;
+            white-space: normal;
+            span {
+                color: rgb(0, 159, 219);
+                position: absolute;
+                bottom: 5px;
+                left: 0;
+                right: 0;
+                font-size: 0.5em;
+                height: initial;
+            }
+        }
+        .scroll-content {
+            overflow-y: hidden;
+        }
+        .slides-wrapper {
+            height: 100%;
+        }
+    }
+}

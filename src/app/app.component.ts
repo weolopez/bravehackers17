@@ -22,6 +22,8 @@ import { ApiaiService } from './services/apiai.service';
 import { PosterListPage } from "../pages/poster-list/poster-list";
 import { MovieListPage } from "../pages/movie-list/movie-list";
 import { Http } from "@angular/http";
+import { PosterViewPage } from "../pages/poster-view/poster-view";
+import { PosterPage } from "../pages/poster/poster";
 
 
 export interface PageInterface {
@@ -65,6 +67,7 @@ export class DigitalInteractivePosterManagementApp {
     { title: 'api.ai intents', link: 'https://console.api.ai/api-client/#/agent/fe732d66-e9b4-4915-8331-31d5bee7266a/intents', index: 0, icon: 'apiai.png' },
     { title: 'IBM Bluemix', link: 'https://console.ng.bluemix.net/dashboard/apps/', index: 0, icon: 'bluemix.png' },
     { title: 'Firebase', link: 'https://console.firebase.google.com/project/bravehackers17/database/data', index: 0, icon: 'firebase.png' },
+    { title: 'Test Poster', component: PosterPage, index: 0, icon: 'poster.png' },
     { title: 'About', component: AboutPage, icon: 'information-circle' }
   ];
   loggedInPages: PageInterface[] = [
@@ -92,19 +95,23 @@ export class DigitalInteractivePosterManagementApp {
     private http: Http,
     //private wsService: WebSocketService
   ) {
+    if (location.search.substr(1)) {
+      console.log('openining page: ' + location.search.substr(1));
+      this.rootPage = PosterPage;
+      this.platformReady();
+    } else {
+      // Check if the user has already seen the tutorial
+      this.storage.get('hasSeenTutorial')
+        .then((hasSeenTutorial) => {
+          if (hasSeenTutorial) {
+            this.rootPage = AboutPage;
+          } else {
+            this.rootPage = TutorialPage;
+          }
+          this.platformReady()
+        })
+    }
 
-
-    // Check if the user has already seen the tutorial
-    this.storage.get('hasSeenTutorial')
-      .then((hasSeenTutorial) => {
-        if (hasSeenTutorial) {
-          this.rootPage = TabsPage;
-        } else {
-          this.rootPage = TutorialPage;
-        }
-        this.rootPage = AboutPage;
-        this.platformReady()
-      })
 
     // load the conference data
     confData.load();
@@ -121,7 +128,7 @@ export class DigitalInteractivePosterManagementApp {
     // the nav component was found using @ViewChild(Nav)
     // reset the nav to remove previous pages and only have this page
     // we wouldn't want the back button to show in this scenario
-    if (page.index === 0) {
+    if ((page.index === 0) && (page.link)) {
       window.open(page.link, '_blank');
       return;
     }
@@ -169,7 +176,7 @@ export class DigitalInteractivePosterManagementApp {
     let self = this;
     // Call any initial plugins when ready
     this.platform.ready().then(() => {
-      
+
       this.events.subscribe('menu:up', () => this.up(this));
       this.events.subscribe('menu:down', () => this.down(this));
       //this.events.subscribe('menu:left', () => this.left(this));
@@ -177,10 +184,10 @@ export class DigitalInteractivePosterManagementApp {
       this.events.subscribe('menu:escape', () => this.escape(this));
       //this.events.subscribe('menu:space', () => this.space(this));
 
-      this.splashScreen.hide();
+      // this.splashScreen.hide();
       this.unregisterKeyboardListener = this.platform.registerListener(this.platform.doc(), 'keydown', (event) => this.handleKeyboardEvents(event), {});
 
-     // setTimeout(this.getData(), 1000);
+      // setTimeout(this.getData(), 1000);
     });
   }
 
@@ -265,21 +272,21 @@ export class DigitalInteractivePosterManagementApp {
   }
   right(o) {
     let app = o;
-   // app.events.publish('menu:right');
+    // app.events.publish('menu:right');
   }
   left(o) {
     let app = o;
-   // app.events.publish('menu:left');
+    // app.events.publish('menu:left');
   }
   escape(o) {
     let app = o;
     app.isMenuActive = false;
-  //  app.events.publish('menu:escape');
+    //  app.events.publish('menu:escape');
   }
   space(o) {
     let app = o;
     app.isMenuActive = false;
-  //  app.events.publish('menu:help');
+    //  app.events.publish('menu:help');
   }
   ionViewDidEnter() {
   }
@@ -305,8 +312,8 @@ export class DigitalInteractivePosterManagementApp {
         this.events.publish('menu:space');
         break;
 
-        //this.events.publish('menu:left');
-        //this.events.publish('menu:right');
+      //this.events.publish('menu:left');
+      //this.events.publish('menu:right');
       default:
         break;
     }

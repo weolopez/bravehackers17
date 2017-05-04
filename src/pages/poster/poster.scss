@@ -1,0 +1,46 @@
+
+
+@mixin aspect-ratio($width, $height) {
+  position: relative;
+  &:before {
+    display: block;
+    content: "";
+    width: 100%;
+    padding-top: ($height / $width) * 100%;
+  }
+  .content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+}
+
+#poster-container {
+    height: 100%;
+.poster-page {
+    
+    @include aspect-ratio(9, 16);
+    background-repeat: no-repeat;
+    background-size: cover;
+    max-height: 100%;
+    overflow: hidden;
+
+    .poster-footer {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        background-color: black;
+        border: 3px solid rgb(0, 159, 219);
+        text-align: center;
+        color: white;
+        font-weight: bold;
+        font-size: 3.0em;
+        padding: 0.3em;
+        font-style: italic;
+    }
+}
+
+}

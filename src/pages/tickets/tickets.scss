@@ -1,0 +1,138 @@
+page-tickets {
+    hr {
+        margin-bottom: 2em;
+    }
+    .tickets-header {
+        font-size: 1.5em;
+    }
+    .tickets-progress {
+        height: 2em;
+        display: table;
+        width: 100%;
+        .progress-step {
+            display: table-cell;
+            font-weight: bold;
+            height: 1em;
+            .progress-step-text {
+                border-bottom: 4px solid black;
+            }
+            .progress-step-text.selected {
+                color: green;
+                border-color: green;
+            }
+        }
+    }
+    .tickets-instructions {
+        margin-bottom: 30px;
+    }
+    .tickets-date {
+        margin-top: 0.5em;
+        margin-bottom: 0.5em;
+    }
+    .swiper-slide-next {
+        .slide-zoom {
+            .ticket-showtime {
+                height: 156px;
+                border: 5px solid rgb(0, 159, 219);
+            }
+        }
+    }
+    .tickets-page-2 .slide-zoom {
+        height: 195px;
+    }
+    .slide-zoom {
+        height: 210px;
+        background-color: rgba(255, 255, 255, 0.3);
+        overflow: auto;
+        .ticket-showtime {
+            border: 1px solid silver;
+            position: relative;
+            height: 150px;
+            width: 160px;
+            white-space: normal;
+            border-radius: 0.5em;
+            background-repeat: no-repeat;
+            background-position-x: center;
+            background-position-y: 8px;
+            background-size: 65px;
+            margin: auto;
+            line-height: 150px;
+            font-size: 1.8em;
+            span {
+                color: rgb(0, 159, 219);
+                position: absolute;
+                bottom: 5px;
+                left: 0;
+                right: 0;
+                font-size: 0.5em;
+                height: initial;
+            }
+        }
+    }
+    .tickets-summary {
+        margin-bottom: 2em;
+        ion-row {
+            padding: 0.5em;
+            border-bottom: 1px solid silver;
+            .summary-item-description {
+                font-weight: bold;
+            }
+            .summary-item-amount {
+                text-align: right;
+                font-weight: bold;
+            }
+        }
+    }
+    .tickets-buttons {
+        ion-col {
+            text-align: center;
+            button {
+                width: 90%;
+            }
+            button.selected {
+                background-color: green;
+                color: white;
+                border: 6px solid #009fdb;
+            }
+        }
+    }
+    .tickets-success {
+        margin-top: 1em;
+        width: 500px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-top: 1em;
+        margin-bottom: 1em;
+        height: 5em;
+        background-image: url(../assets/images/svg/checkOutIcon.svg);
+        background-repeat: no-repeat;
+        background-size: 3.5em;
+        background-position-x: 3.6em;
+    }
+    .tickets-success-text {
+        padding-top: 0.5em;
+        text-align: center;
+        font-size: 1.4em;
+        width: 300px;
+        margin: auto;
+    }
+    .tickets-reminder {
+        margin-top: 1.5em;
+        text-align: center;
+        font-size: 1.4em;
+    }
+    .ticket-number {
+        text-align: center;
+        font-size: 3.4em;
+        font-weight: bold;
+        color: red;
+        width: 300px;
+        margin: auto;
+    }
+    .scroll-content {
+        overflow-y: hidden;
+    }
+    .slides-wrapper {
+        height: 100%;
+    }
+}

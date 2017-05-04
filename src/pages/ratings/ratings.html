@@ -1,0 +1,46 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-title><span class="mp-title-icon" style="background-image: url(assets/images/svg/ratingsIco.white.svg); background-position-y: 0.4em;"></span>Ratings</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <div class="movie-header">{{selectedMovie.title}}, Reviews {{selectedMovie.year}}</div>
+
+    <hr>
+
+    <div class="movie-ratings">
+
+        <div class="rating">
+            <div class="rating-icon" style="background-image: url(assets/images/svg/rottenTomatoes.svg)"></div>
+            <div class="rating-name">{{selectedMovie.ratings.rottenTomatoes.name}}</div>
+            <div class="rating-value">{{selectedMovie.ratings.rottenTomatoes.rating}}</div>
+        </div>
+        <div class="rating" style="border-left:1px solid silver; border-right:1px solid silver">
+            <div class="rating-icon" style="background-image: url(assets/images/svg/imdb_logo.svg)"></div>
+            <div class="rating-name">{{selectedMovie.ratings.imdb.name}}</div>
+            <div class="rating-value">{{selectedMovie.ratings.imdb.rating}}</div>
+        </div>
+        <div class="rating">
+            <div class="rating-icon" style="background-image: url(assets/images/svg/commonSenseLogo.svg)"></div>
+            <div class="rating-name">{{selectedMovie.ratings.commonSenseMedia.name}}</div>
+            <div class="rating-value">{{selectedMovie.ratings.commonSenseMedia.rating}}</div>
+        </div>
+    </div>
+
+    <hr>
+
+    <div class="movie-synopsis">
+        <h5>Critic Reviews</h5>
+        <ion-slides #slides slidesPerView="1" loop pager>
+            <ion-slide *ngFor="let review of selectedMovie.criticReviews; let i=index">
+                <div class="critic-review">
+                    <div class="review-text">{{review.text}}</div>
+                    <div class="review-name">{{review.name}}</div>
+                    <div class="review-company">{{review.company}}</div>
+                </div>
+            </ion-slide>
+        </ion-slides>
+    </div>
+
+</ion-content>

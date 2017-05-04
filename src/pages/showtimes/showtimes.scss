@@ -1,0 +1,30 @@
+page-showtimes {
+    hr {
+        margin-bottom: 2em;
+    }
+    .showtimes-header {
+        font-size: 1.5em;
+    }
+    .movie-showtimes {
+        height: 10em;
+        .showtimes-section {
+            display: table;
+            width: 100%;
+            .showtimes-type {
+                display: table-cell;
+                font-weight: bold;
+                height: 7em;
+                width: 100px;
+            }
+            .showtimes-list {
+                padding-left: 1em;
+                height: 7em;
+                .showtime {
+                    width: 20%;
+                    display: inline-block;
+                    margin-bottom: 1em;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,14 @@
+page-trailer {
+    .trailer-page {
+        background-color: black;
+    }
+    .trailer-holder {
+        border-radius: 1em;
+        height: 85%;
+        width: 100%;
+        background-color: black;
+        .scroll-content {
+            overflow-y: hidden;
+        }
+    }
+}

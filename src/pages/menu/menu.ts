@@ -10,6 +10,7 @@ import { NavController, ViewController, Platform, Slides, ModalController, Modal
 
 //import { ApiaiService } from '../../app/services/apiai.service';
 import { AnalyticsService } from "../../app/services/analytics.service";
+import { ImdbPage } from "../imdb/imdb";
 
 declare var webkitSpeechRecognition: any;
 
@@ -67,7 +68,7 @@ export class MenuPage {
               {
                   title: "Info",
                   icon: "assets/images/svg/aboutIco.svg",
-               //   buttonPage: ImdbPage,
+                  buttonPage: ImdbPage,
                   presentAs: "modal"
               },
               {

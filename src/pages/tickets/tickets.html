@@ -1,0 +1,160 @@
+<ion-header>
+    <ion-navbar hideBackButton>
+        <ion-title><span class="mp-title-icon" style="background-image: url(assets/images/svg/ticketsIco.white.svg); background-position-y: 0.25em;"></span>Tickets</ion-title>
+    </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+
+    <div [ngSwitch]="currentPage">
+
+        <div *ngSwitchCase="1" class="tickets-page-1">
+            <div class="tickets-header">Checkout - {{selectedMovie.title}}, {{selectedMovie.year}}</div>
+
+            <hr>
+
+            <div class="tickets-progress">
+                <div class="progress-step">
+                    <span class="progress-step-text selected">1. Pick a Show Time</span>
+                </div>
+                <div class="progress-step">
+                    <span class="progress-step-text">2. No. of Tickets</span>
+                </div>
+                <div class="progress-step">
+                    <span class="progress-step-text">3. Review Purchase</span>
+                </div>
+                <div class="progress-step">
+                    <span class="progress-step-text">4. Checkout</span>
+                </div>
+            </div>
+
+            <div class="tickets-instructions">
+                <p>Wave your hand left or right to select an available time. Wave your hand up to select the highlighted item. Wave your hand down to cancel.</p>
+            </div>
+
+            <div #ticketTimes class="tickets-times">
+                <ion-slides #timeSlides slidesPerView="3" loop pager>
+                    <ion-slide *ngFor="let showtime of selectedMovie.showtimes[0].standard; let i=index">
+                        <div class="ticket-showtime">{{showtime.showtime}}</div>
+                    </ion-slide>
+                </ion-slides>
+            </div>
+
+        </div>
+
+        <div *ngSwitchCase="2" class="tickets-page-2">
+            <div class="tickets-header">Checkout - {{selectedMovie.title}}, {{selectedMovie.year}}</div>
+
+            <hr>
+
+            <div class="tickets-progress">
+                <div class="progress-step">
+                    <span class="progress-step-text selected">1. Pick a Show Time</span>
+                </div>
+                <div class="progress-step">
+                    <span class="progress-step-text selected">2. No. of Tickets</span>
+                </div>
+                <div class="progress-step">
+                    <span class="progress-step-text">3. Review Purchase</span>
+                </div>
+                <div class="progress-step">
+                    <span class="progress-step-text">4. Checkout</span>
+                </div>
+            </div>
+
+            <div class="tickets-instructions">
+                <h6>Select a number of tickets ($10.00 Each)</h6>
+                <p>You can select up to ten tickets on this screen. For larger amounts, visit our staffed ticket counter or customer service desk</p>
+            </div>
+
+            <div #ticketAmounts class="tickets-amounts">
+                <ion-slides #amountSlides slidesPerView="3" loop pager>
+                    <ion-slide *ngFor="let amount of amounts">
+                        <div class="ticket-showtime">{{amount}}</div>
+                    </ion-slide>
+                </ion-slides>
+            </div>
+
+        </div>
+
+        <div *ngSwitchCase="3" class="tickets-page-3">
+            <div class="tickets-header">Checkout - {{selectedMovie.title}}, {{selectedMovie.year}}</div>
+
+            <hr>
+
+            <div class="tickets-progress">
+                <div class="progress-step">
+                    <span class="progress-step-text selected">1. Pick a Show Time</span>
+                </div>
+                <div class="progress-step">
+                    <span class="progress-step-text selected">2. No. of Tickets</span>
+                </div>
+                <div class="progress-step">
+                    <span class="progress-step-text selected">3. Review Purchase</span>
+                </div>
+                <div class="progress-step">
+                    <span class="progress-step-text">4. Checkout</span>
+                </div>
+            </div>
+
+            <div class="tickets-date">
+                <h6>{{getNow() | date:'fullDate'}}</h6>
+            </div>
+
+            <div class="tickets-summary">
+                <ion-row>
+                    <ion-col width-50 class="summary-item-description">SUBTOTAL</ion-col>
+                    <ion-col width-50 class="summary-item-amount">$20.00</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col width-50 class="summary-item-description">TAX</ion-col>
+                    <ion-col width-50 class="summary-item-amount">$2.20</ion-col>
+                </ion-row>
+                <ion-row>
+                    <ion-col width-50 class="summary-item-description">TOTAL AMOUNT</ion-col>
+                    <ion-col width-50 class="summary-item-amount">$22.20</ion-col>
+                </ion-row>
+            </div>
+
+            <div class="tickets-buttons">
+                <ion-row>
+                    <ion-col width-33><button #purchaseButton [ngClass]="{selected: selectedButton==1}" ion-button outline large>Purchase</button></ion-col>
+                    <ion-col width-33><button #changeButton [ngClass]="{selected: selectedButton==2}" ion-button outline large>Change</button></ion-col>
+                    <ion-col width-33><button #cancelButton [ngClass]="{selected: selectedButton==3}" ion-button outline large>Cancel</button></ion-col>
+                </ion-row>
+            </div>
+        </div>
+
+        <div *ngSwitchCase="4" class="tickets-page-4">
+            <div class="tickets-header">Checkout - {{selectedMovie.title}}, {{selectedMovie.year}}</div>
+
+            <hr>
+
+            <div class="tickets-progress">
+                <div class="progress-step">
+                    <span class="progress-step-text selected">1. Pick a Show Time</span>
+                </div>
+                <div class="progress-step">
+                    <span class="progress-step-text selected">2. No. of Tickets</span>
+                </div>
+                <div class="progress-step">
+                    <span class="progress-step-text selected">3. Review Purchase</span>
+                </div>
+                <div class="progress-step">
+                    <span class="progress-step-text selected">4. Checkout</span>
+                </div>
+            </div>
+
+            <div class="tickets-success">
+                <div class="tickets-success-text">
+                    <div>Success, your order is complete.</div>
+                    <div>Your ticket code number is:</div>
+                </div>
+            </div>
+            <div class="ticket-number">438</div>
+            <div class="tickets-reminder">
+                <div>Please keep this number and use it to check in</div>
+            </div>
+        </div>
+    </div>
+</ion-content>

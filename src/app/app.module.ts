@@ -53,6 +53,15 @@ import {VgBufferingModule} from 'videogular2/buffering';
 
 import { SinglePlayerModule } from "../components/single-player/single-player.module";
 import { MenuPage } from "../pages/menu/menu";
+import { PosterPage } from "../pages/poster/poster";
+import { ShowTimesPage } from "../pages/showtimes/showtimes";
+import { MovieService } from "../providers/movie.service";
+import { ActorsPage } from "../pages/actors/actors";
+import { ImdbPage } from "../pages/imdb/imdb";
+import { InstructionsPage } from "../pages/instructions/instructions";
+import { RatingsPage } from "../pages/ratings/ratings";
+import { TicketsPage } from "../pages/tickets/tickets";
+import { TrailerPage } from "../pages/trailer/trailer";
 
 export const firebaseConfig = {
     apiKey: "AIzaSyDQ1wWxzlqkGMuB6bL4bQmeyVH7-OfDgzM",
@@ -87,7 +96,15 @@ export const firebaseConfig = {
     PosterListPage,
     PosterViewPage,
     PosterEditPage,
+    PosterPage,
     HomePage,
+    ShowTimesPage,
+    ActorsPage,
+    ImdbPage,
+    InstructionsPage,
+    RatingsPage,
+    TicketsPage,
+    TrailerPage,
     MenuComponent
   ],
   imports: [      
@@ -128,6 +145,14 @@ export const firebaseConfig = {
     PosterListPage,
     PosterEditPage,
     PosterViewPage,
+    PosterPage,
+    ShowTimesPage,
+    ActorsPage,
+    ImdbPage,
+    InstructionsPage,
+    RatingsPage,
+    TicketsPage,
+    TrailerPage,
     HomePage
        
   ],
@@ -136,6 +161,7 @@ export const firebaseConfig = {
     UserData,
     M2XService,
     PosterService,
+    MovieService,
     MovieData,
     InAppBrowser,
     SplashScreen,

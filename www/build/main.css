@@ -39111,6 +39111,48 @@ page-mrtdata ion-label {
   margin: 0px 8px 13px 0;
 }
 
+#poster-container {
+  height: 100%;
+}
+
+#poster-container .poster-page {
+  position: relative;
+  background-repeat: no-repeat;
+  background-size: cover;
+  max-height: 100%;
+  overflow: hidden;
+}
+
+#poster-container .poster-page:before {
+  display: block;
+  content: "";
+  width: 100%;
+  padding-top: 177.77778%;
+}
+
+#poster-container .poster-page .content {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+}
+
+#poster-container .poster-page .poster-footer {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: black;
+  border: 3px solid #009fdb;
+  text-align: center;
+  color: white;
+  font-weight: bold;
+  font-size: 3.0em;
+  padding: 0.3em;
+  font-style: italic;
+}
+
 page-speaker-list .scroll-content {
   background: #EDEDED;
 }
@@ -39196,6 +39238,43 @@ page-speaker-list .speaker-card ion-card-header .item {
 page-speaker-list .speaker-card ion-card-content {
   padding-left: 0;
   padding-right: 0;
+}
+
+/**
+ * Ratios
+ * Returns the ratio for specified dimensions.
+ */
+.ratio-16x9 {
+  padding-bottom: 56.25%;
+}
+
+.ratio-4x3 {
+  padding-bottom: 75%;
+}
+
+.intrinsic-container {
+  position: relative;
+  height: 100%;
+  overflow: hidden;
+}
+
+/* 16x9 Aspect Ratio */
+.intrinsic-container-16x9 {
+  padding-bottom: 56.25%;
+}
+
+/* 4x3 Aspect Ratio */
+.intrinsic-container-4x3 {
+  padding-bottom: 75%;
+}
+
+.intrinsic-container iframe {
+  min-width: 1080px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
 }
 
 page-schedule ion-item-sliding[track=ionic] ion-label {
@@ -39340,6 +39419,41 @@ ion-item[track=navigation] .dot {
   background-color: #6600CC;
   border-radius: 5px;
   margin-right: 10px;
+}
+
+page-showtimes hr {
+  margin-bottom: 2em;
+}
+
+page-showtimes .showtimes-header {
+  font-size: 1.5em;
+}
+
+page-showtimes .movie-showtimes {
+  height: 10em;
+}
+
+page-showtimes .movie-showtimes .showtimes-section {
+  display: table;
+  width: 100%;
+}
+
+page-showtimes .movie-showtimes .showtimes-section .showtimes-type {
+  display: table-cell;
+  font-weight: bold;
+  height: 7em;
+  width: 100px;
+}
+
+page-showtimes .movie-showtimes .showtimes-section .showtimes-list {
+  padding-left: 1em;
+  height: 7em;
+}
+
+page-showtimes .movie-showtimes .showtimes-section .showtimes-list .showtime {
+  width: 20%;
+  display: inline-block;
+  margin-bottom: 1em;
 }
 
 .speaker-detail img {

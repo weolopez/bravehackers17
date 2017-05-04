@@ -1,0 +1,48 @@
+page-ratings {
+    h5 {
+        font-size: 1.1em;
+    }
+    hr {
+        margin-top: 1em;
+        margin-bottom: 1em;
+    }
+    .movie-header {
+        font-size: 1.5em;
+    }
+    .rating {
+        display: inline-block;
+        width: 32%;
+        text-align: center;
+        .rating-icon {
+            height: 4em;
+            width: 100%;
+            background-repeat: no-repeat;
+            background-position: center;
+            background-size: contain;
+        }
+        .rating-name {
+            font-weight: bold;
+            margin: 0.2em;
+        }
+        .rating-value {
+            font-size: 1.6em;
+        }
+    }
+    .critic-review {
+        width: 90%;
+        height: 10em;
+        text-align: left;
+        font-size: .8em;
+        margin: auto;
+        .review-text {
+            margin-bottom: 10px;
+            overflow-y: auto;
+        }
+        .review-name {
+            font-size: 0.7em;
+        }
+        .review-company {
+            font-size: 0.6em;
+        }
+    }
+}

@@ -6,6 +6,11 @@ import { NavController, ModalController, Modal, Platform, ViewController, Gestur
 //import { AnalyticsService } from "../../app/services/analytics.service";
 import { M2XService } from "../../app/services/m2x.service";
 import { MenuPage } from "../../pages/menu/menu";
+import { ShowTimesPage } from "../../pages/showtimes/showtimes";
+import { TicketsPage } from "../../pages/tickets/tickets";
+import { ImdbPage } from "../../pages/imdb/imdb";
+import { RatingsPage } from "../../pages/ratings/ratings";
+import { TrailerPage } from "../../pages/trailer/trailer";
 declare var webkitSpeechRecognition: any;
 
 //import { ShowTimesPage } from '../../pages/showtimes/showtimes';
@@ -41,12 +46,12 @@ export class MenuComponent {
     public modalCtrl: ModalController,
     public platform: Platform,
     private changeDetector: ChangeDetectorRef
-  //  public viewCtrl: ViewController,
+    //  public viewCtrl: ViewController,
     //private movieService: MovieService,
     //private m2x: M2XService,
-   // private analytics: AnalyticsService
-  //  private apiaiService: ApiaiService
-    ) {
+    // private analytics: AnalyticsService
+    //  private apiaiService: ApiaiService
+  ) {
     this.getMovie();
 
     this.intents = new Map();
@@ -61,7 +66,7 @@ export class MenuComponent {
     this.loadIntents();
     //this.analytics.loadImages();
     this.events.subscribe('menu:activate', () => {
-      if (!this.showingPurchase) this.activateMenu() 
+      if (!this.showingPurchase) this.activateMenu()
     });
     this.events.subscribe('menu:select', () => {
       if (!this.showingPurchase) this.activateMenuItem();
@@ -74,22 +79,22 @@ export class MenuComponent {
       this.modal.dismiss();
     });
 
-  //  this.events.subscribe('menu:help', () => this.presentModal(InstructionsPage));
+    //  this.events.subscribe('menu:help', () => this.presentModal(InstructionsPage));
 
   }
 
 
   getMovie() {
- /**
-  * 
-     this.movieService.getMovie().subscribe(r => {
-      r.subscribe(movie => {
-        console.log('getting movie')
-        console.dir(movie);
-        this.selectedMovie = movie
-      })
-    })
-  */
+    /**
+     * 
+        this.movieService.getMovie().subscribe(r => {
+         r.subscribe(movie => {
+           console.log('getting movie')
+           console.dir(movie);
+           this.selectedMovie = movie
+         })
+       })
+     */
   }
 
   presentModal(page) {
@@ -119,31 +124,31 @@ export class MenuComponent {
     let self = this;
     self.presentModal(MenuPage);
     //self.analytics.analyzeImage();
-   /* self.m2x.postData(
-      {
-        "timestamp": new Date().toISOString(),
-        "values": {
-          "movieName": self.selectedMovie['title']
-        }
-      }
-    ).subscribe((result) => {
-      console.log(result);
-    }, (error) => {
-      console.log(error);
-    });
-    */
+    /* self.m2x.postData(
+       {
+         "timestamp": new Date().toISOString(),
+         "values": {
+           "movieName": self.selectedMovie['title']
+         }
+       }
+     ).subscribe((result) => {
+       console.log(result);
+     }, (error) => {
+       console.log(error);
+     });
+     */
   }
 
 
   itemSelected(itemIndex) {
     let menuItem = this.menuItems[itemIndex];
-  //  let page = menuItem.buttonPage;
-    //   if (menuItem.presentAs == "page") {
-    //   this.gotoPage(page);
+    let page = menuItem.buttonPage;
+   // if (menuItem.presentAs == "page") {
+    //  this.gotoPage(page);
     //} else if (menuItem.presentAs == "modal") {
-   // this.presentModal(page);
-    if (menuItem.title === 'Purchase Tickets') this.showingPurchase = true;
-    //   }
+      this.presentModal(page);
+      if (menuItem.title === 'Purchase Tickets') this.showingPurchase = true;
+    //}
   }
 
   activateMenuItem() {
@@ -157,39 +162,39 @@ export class MenuComponent {
     {
       title: "Show Times",
       icon: "assets/images/svg/showTimesIco.svg",
-     // buttonPage: ShowTimesPage,
+      buttonPage: ShowTimesPage,
       presentAs: "modal"
     },
     {
       title: "Purchase Tickets",
       icon: "assets/images/svg/ticketsIco.svg",
-     // buttonPage: TicketsPage,
+      buttonPage: TicketsPage,
       presentAs: "modal"
     },
     {
       title: "Info",
       icon: "assets/images/svg/aboutIco.svg",
-     // buttonPage: ImdbPage,
+       buttonPage: ImdbPage,
       presentAs: "modal"
     },
     {
       title: "View Trailer",
       icon: "assets/images/svg/trailerIco.svg",
-     // buttonPage: TrailerPage,
+      buttonPage: TrailerPage,
       presentAs: "modal"
     },
     {
       title: "View Ratings",
       icon: "assets/images/svg/ratingsIco.svg",
-     // buttonPage: RatingsPage,
+      buttonPage: RatingsPage,
       presentAs: "modal"
     }
   ];
 
-/**
- * Audio reated methods
- * TODO move out and trigger from event pattern
- */
+  /**
+   * Audio reated methods
+   * TODO move out and trigger from event pattern
+   */
 
   startRecognition() {
     this.platform.ready().then(() => {

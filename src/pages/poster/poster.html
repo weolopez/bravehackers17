@@ -1,0 +1,27 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Poster</ion-title>
+    <ion-buttons end>
+      <ion-item>
+        <ion-label>Posters</ion-label>
+        <ion-select [(ngModel)]="m2xposterid" (ionChange)="m2xposterChange()">
+          <ion-option *ngFor="let m2xposter of m2xposters" [value]="m2xposter.id">{{m2xposter.name}}</ion-option>
+        </ion-select>
+      </ion-item>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+  <div id="poster-container">
+    <div *ngIf="movie" #mainpage class="fixed-content poster-page" [style.backgroundImage]="'url(' + movie.posterUrl + ')'">
+      <div class="poster-footer">NOW PLAYING</div>
+    </div>
+  </div>
+
+  <bh-menu></bh-menu>
+
+</ion-content>

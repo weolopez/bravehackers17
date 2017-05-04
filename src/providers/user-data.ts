@@ -18,7 +18,6 @@ export class UserData {
     public storage: Storage,
     public auth$: AngularFireAuth
   ) {
-    this.authState = auth$.getAuth();
     auth$.subscribe((state: FirebaseAuthState) => {
       this.authState = state;
     });

@@ -29,7 +29,6 @@ export class PosterListPage {
        this.m2xposters = data.json().devices)
       .subscribe(data=>
         console.log('completed'));
-    
   }
   add() {
     this.m2x.newM2XDevice().subscribe(r=>this.list());
