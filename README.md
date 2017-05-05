@@ -1,4 +1,4 @@
-# Ionic 2 Conference Application
+# Digital Interactive Poster Demo
 
 This is purely a demo of Ionic 2 with TypeScript. It is still in development.
 
